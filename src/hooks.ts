@@ -39,12 +39,14 @@ async function onStartup() {
     Zotero.unlockPromise,
     Zotero.uiReadyPromise,
   ]);
+
+
   initLocale();
 
   setDefaultPrefSettings();
 
   registerNotify(["item"]);
-  registerReaderTabPanel();
+  await registerReaderTabPanel();
   registerReaderInitializer();
   registerPrefsWindow();
   registerMenu();
@@ -52,6 +54,7 @@ async function onStartup() {
   await registerItemBoxExtraRows();
   registerTitleRenderer();
   registerShortcuts();
+
 }
 
 function onShutdown(): void {

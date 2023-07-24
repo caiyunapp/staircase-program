@@ -3,6 +3,7 @@ import { clearPref, getPref, setPref } from "../utils/prefs";
 import { setServiceSecret } from "../utils/translate";
 
 export function setDefaultPrefSettings() {
+
   const isZhCN = Zotero.locale === "zh-CN";
   const servicesIds = SERVICES.map((service) => service.id);
   if (!servicesIds.includes((getPref("translateSource") as string) || "")) {

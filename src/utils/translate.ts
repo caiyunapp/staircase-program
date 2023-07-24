@@ -68,6 +68,8 @@ export interface TranslateTask {
    * For extra services function.
    */
   extraTasks: TranslateTask[] & { extraTasks: [] }[];
+
+  dict_name?: string;
 }
 
 export type TranslateTaskProcessor = (
@@ -83,10 +85,17 @@ export class TranslateTaskRunner {
   public async run(data: TranslateTask) {
     data.langfrom = getPref("sourceLanguage") as string;
     data.langto = getPref("targetLanguage") as string;
+
+    const dict_name = getPref('defCustomerDicts') as string;
+    if ( dict_name ) {
+      data.dict_name = dict_name;
+    }
+   
     // ***** add customer data *****
     data.secret = getServiceSecret(data.service);
     data.status = "processing";
     try {
+      ztoolkit.log('http: data show')
       ztoolkit.log(data);
       await this.processor(data as Required<TranslateTask>);
       data.status = "success";

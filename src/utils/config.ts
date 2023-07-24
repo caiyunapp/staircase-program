@@ -33,15 +33,15 @@ export const LANG_CODE = <const>[
   { code: "zh", name: "Chinese" },
 ];
 
-// export const DEF_CUSTOMER = <const> [
-//   { key: 'law', name: '法学领域术语库', trans_type: 'en2zh' },
-//   { key: 'medicine', name: '医学领域术语库', trans_type: 'en2zh' },
-//   { key: 'machinery', name: '机械领域术语库', trans_type: 'en2zh' },
-//   { key: 'computer', name: '计算机领域术语库', trans_type: 'en2zh' },
-//   { key: 'commerce', name: '商贸领域术语库', trans_type: 'en2zh' },
-//   { key: 'psychology', name: '心理学领域术语库', trans_type: 'en2zh' },
-//   { key: 'chemistry', name: '化学领域术语库', trans_type: 'en2zh' }
-// ]
+export const DEF_CUSTOMER = <const> [
+  { key: 'law', name: '法学领域术语库', trans_type: 'en2zh' },
+  { key: 'medicine', name: '医学领域术语库', trans_type: 'en2zh' },
+  { key: 'machinery', name: '机械领域术语库', trans_type: 'en2zh' },
+  { key: 'computer', name: '计算机领域术语库', trans_type: 'en2zh' },
+  { key: 'commerce', name: '商贸领域术语库', trans_type: 'en2zh' },
+  { key: 'psychology', name: '心理学领域术语库', trans_type: 'en2zh' },
+  { key: 'chemistry', name: '化学领域术语库', trans_type: 'en2zh' }
+]
 
 
 export const SVGIcon = `<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

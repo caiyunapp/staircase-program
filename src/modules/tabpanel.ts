@@ -2,13 +2,16 @@ import { getString } from "../utils/locale";
 import { config } from "../../package.json";
 import { LANG_CODE, SERVICES } from "../utils/config";
 import { getPref, setPref } from "../utils/prefs";
+import  GetDefCustomerDictsHttp from './services/customer_dicts';
 import {
   addTranslateTask,
   getLastTranslateTask,
   putTranslateTaskAtHead,
 } from "../utils/translate";
 
-export function registerReaderTabPanel() {
+export async function registerReaderTabPanel() {
+  const data:any = {};
+  await updateReaderTabPanelsCustomerDicts(data);
   ztoolkit.ReaderTabPanel.register(
     getString("readerpanel.label"),
     (
@@ -17,6 +20,25 @@ export function registerReaderTabPanel() {
       ownerWindow: Window,
       readerInstance: _ZoteroTypes.ReaderInstance
     ) => {
+      ztoolkit.log(' ---- v ---updateReaderTabPanelsCustomerDicts---')
+      ztoolkit.log(data)
+      setPref('defCustomerDictsList', JSON.stringify(data.result))
+
+      // updateReaderTabPanelsCustomerDicts().then( data => {
+      //   ztoolkit.log('=== setPref ===');
+      //   setPref('defCustomerDictsList', JSON.stringify(data))
+      //   ztoolkit.log('--- setPref ---');
+      //   if (ownerDeck.selectedPanel?.children[0].tagName === "vbox") {
+      //     panel = createPanel(ownerDeck, readerInstance._instanceID);
+      //   }
+      //   panel && buildPanel(panel, readerInstance._instanceID);
+      //   ztoolkit.log('=== over ===');
+      // }).catch(error => {
+      //   ztoolkit.log(error)
+      //   ztoolkit.log('---- error ----')
+      // })
+
+
       if (ownerDeck.selectedPanel?.children[0].tagName === "vbox") {
         panel = createPanel(ownerDeck, readerInstance._instanceID);
       }
@@ -41,6 +63,8 @@ export function registerReaderTabPanel() {
       updateTextAreasSize();
     });
   updateTextAreasSize(true);
+
+  ztoolkit.log('registerReaderTabPanel')
 }
 
 async function openWindowPanel() {
@@ -83,25 +107,9 @@ export function updateReaderTabPanels() {
   updateTextAreasSize(true);
 }
 
-export function updateReaderTabPanelsCustomerDicts( container: HTMLElement | Document ) {
-  Array.from(container.querySelectorAll("textarea")).forEach((elem) => {
-    elem.value =  "需要测试"
-    setTimeout(() => {
-      elem.value =  "需要测试"
-    }, 0);
-  });
-  import("./services/customer_dicts").then(
-    ( e:any ) => {  
-      const data = e.common_customer_dicts;
-      console.log(data);
-      // for ( const key  in data ) {
-      //   DEF_CUSTOMER.push({
-      //       name: key,
-      //       key: data[key].name_zh,
-      //   })
-      // }
-    }
-  );
+export async function updateReaderTabPanelsCustomerDicts(data) {;
+  data.result =  await GetDefCustomerDictsHttp();
+  return data;
 }
 
 function createPanel(ownerDeck: XUL.Deck, refID: string) {
@@ -151,6 +159,7 @@ function createPanel(ownerDeck: XUL.Deck, refID: string) {
     },
     container
   );
+  ztoolkit.log('--- createPanel ---')
   return container.querySelector("tabpanel") as XUL.TabPanel;
 }
 
@@ -160,6 +169,13 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
   if (!force && panel.querySelector(`#${makeId("root")}`)) {
     return;
   }
+
+  const __data:any = getPref('defCustomerDictsList');
+  const DEF_CUSTOMER = JSON.parse(__data);
+  ztoolkit.log('--- get def customer dicts list ---')
+  ztoolkit.log(DEF_CUSTOMER)
+  ztoolkit.log(typeof(DEF_CUSTOMER))
+
   ztoolkit.UI.appendElement(
     {
       tag: "vbox",
@@ -284,6 +300,8 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
                   listener: (e: Event) => {
                     setPref("sourceLanguage", (e.target as XUL.MenuList).value);
                     addon.hooks.onReaderTabPanelRefresh();
+                    ztoolkit.log("listeners langfrom:");
+                    ztoolkit.log((e.target as XUL.MenuList).value);
                   },
                 },
               ],
@@ -330,6 +348,8 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
                   listener: (e: Event) => {
                     setPref("targetLanguage", (e.target as XUL.MenuList).value);
                     addon.hooks.onReaderTabPanelRefresh();
+                    ztoolkit.log("listeners langto:");
+                    ztoolkit.log((e.target as XUL.MenuList).value)
                   },
                 },
               ],
@@ -376,21 +396,24 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
                 {
                   type: "command",
                   listener: (e: Event) => {
+                   
                     setPref("defCustomerDicts", (e.target as XUL.MenuList).value);
                     addon.hooks.onReaderTabPaneCustomerDicts();
+                    ztoolkit.log('listener defCustomerDicts:')
+                    ztoolkit.log((e.target as XUL.MenuList).value)
                   },
                 },
               ],
               children: [
                 {
                   tag: "menupopup",
-                  // children: DEF_CUSTOMER.map((lang) => ({
-                  //   tag: "menuitem",
-                  //   attributes: {
-                  //     label: lang.name,
-                  //     value: lang.key ,
-                  //   },
-                  // })),
+                  children: DEF_CUSTOMER.map((lang:any) => ({
+                    tag: "menuitem",
+                    attributes: {
+                      label: lang.name,
+                      value: lang.key ,
+                    },
+                  })),
                 },
               ],
             },
@@ -628,6 +651,7 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
                 {
                   type: "input",
                   listener: (ev) => {
+                    console.log(ev)
                     const task = getLastTranslateTask({
                       id: panel.getAttribute("translate-task-id") || "",
                     });
@@ -779,6 +803,8 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
   updatePanel(panel);
   updateTextAreaSize(panel);
   recordPanel(panel);
+
+  ztoolkit.log('--- buildPanel ---')
 }
 
 function buildExtraPanel(panel: XUL.Box) {
