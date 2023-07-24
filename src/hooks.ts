@@ -6,6 +6,7 @@ import {
 import {
   registerReaderTabPanel,
   updateReaderTabPanels,
+  updateReaderTabPanelsCustomerDicts,
 } from "./modules/tabpanel";
 import { buildReaderPopup, updateReaderPopup } from "./modules/popup";
 import { registerNotify } from "./modules/notify";
@@ -188,6 +189,10 @@ function onReaderTabPanelRefresh() {
   updateReaderTabPanels();
 }
 
+function onReaderTabPaneCustomerDicts() {
+  
+}
+
 function onSwitchTitleColumnDisplay() {
   setPref(
     "titleColumnMode",
@@ -212,5 +217,6 @@ export default {
   onReaderPopupBuild,
   onReaderPopupRefresh,
   onReaderTabPanelRefresh,
+  onReaderTabPaneCustomerDicts,
   onSwitchTitleColumnDisplay,
 };

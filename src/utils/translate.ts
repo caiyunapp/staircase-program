@@ -1,6 +1,5 @@
 import { getService, SecretValidateResult, SERVICES } from "./config";
 import { getString } from "./locale";
-import { niutransStatusCallback } from "./niuTransLogin";
 import { getPref, setPref } from "./prefs";
 
 export interface TranslateTask {
@@ -84,6 +83,7 @@ export class TranslateTaskRunner {
   public async run(data: TranslateTask) {
     data.langfrom = getPref("sourceLanguage") as string;
     data.langto = getPref("targetLanguage") as string;
+    // ***** add customer data *****
     data.secret = getServiceSecret(data.service);
     data.status = "processing";
     try {
@@ -325,22 +325,5 @@ export const secretStatusButtonData: {
     callback(status: boolean): void;
   };
 } = {
-  niutranspro: {
-    labels: {
-      pass: "service.niutranspro.secret.pass",
-      fail: "service.niutranspro.secret.fail",
-    },
-    callback: niutransStatusCallback,
-  },
-  deeplcustom: {
-    labels: {
-      pass: "service.deeplcustom.secret.pass",
-      fail: "service.deeplcustom.secret.fail",
-    },
-    callback: function () {
-      Zotero.launchURL(
-        "https://github.com/KyleChoy/zotero-pdf-translate/blob/CustomDeepL/README.md"
-      );
-    },
-  },
+
 };

@@ -33,6 +33,17 @@ export const LANG_CODE = <const>[
   { code: "zh", name: "Chinese" },
 ];
 
+// export const DEF_CUSTOMER = <const> [
+//   { key: 'law', name: '法学领域术语库', trans_type: 'en2zh' },
+//   { key: 'medicine', name: '医学领域术语库', trans_type: 'en2zh' },
+//   { key: 'machinery', name: '机械领域术语库', trans_type: 'en2zh' },
+//   { key: 'computer', name: '计算机领域术语库', trans_type: 'en2zh' },
+//   { key: 'commerce', name: '商贸领域术语库', trans_type: 'en2zh' },
+//   { key: 'psychology', name: '心理学领域术语库', trans_type: 'en2zh' },
+//   { key: 'chemistry', name: '化学领域术语库', trans_type: 'en2zh' }
+// ]
+
+
 export const SVGIcon = `<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M23.3155 8.18419C22.8986 8.31989 8.76245 11.3119 8.76245 11.3119C8.01199 11.5032 7.41685 12.2586 7.41685 12.9976V26.2394C7.41685 26.2394 8.68397 24.8414 9.52109 24.127C10.1734 23.5694 11.3572 23.0986 11.5501 23.0315C12.3463 22.7585 22.1939 20.6968 22.1939 20.6968C24.6823 19.9806 24.5826 18.653 24.5826 18.653C24.5826 18.653 24.5826 9.26492 24.5826 8.65506C24.5826 8.00597 24.0758 7.29475 24.0758 7.29475C24.0758 7.29475 24.5712 7.77544 23.3155 8.18419Z" fill="url(#paint0_linear_2_59)"/>
 <path d="M12.845 17.5608C13.431 17.5608 13.9061 17.0858 13.9061 16.4997C13.9061 15.9137 13.431 15.4386 12.845 15.4386C12.259 15.4386 11.7839 15.9137 11.7839 16.4997C11.7839 17.0858 12.259 17.5608 12.845 17.5608Z" fill="white"/>

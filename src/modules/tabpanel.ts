@@ -83,6 +83,27 @@ export function updateReaderTabPanels() {
   updateTextAreasSize(true);
 }
 
+export function updateReaderTabPanelsCustomerDicts( container: HTMLElement | Document ) {
+  Array.from(container.querySelectorAll("textarea")).forEach((elem) => {
+    elem.value =  "需要测试"
+    setTimeout(() => {
+      elem.value =  "需要测试"
+    }, 0);
+  });
+  import("./services/customer_dicts").then(
+    ( e:any ) => {  
+      const data = e.common_customer_dicts;
+      console.log(data);
+      // for ( const key  in data ) {
+      //   DEF_CUSTOMER.push({
+      //       name: key,
+      //       key: data[key].name_zh,
+      //   })
+      // }
+    }
+  );
+}
+
 function createPanel(ownerDeck: XUL.Deck, refID: string) {
   const container = ownerDeck.selectedPanel;
   container.innerHTML = "";
@@ -322,6 +343,103 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
                       value: lang.code,
                     },
                   })),
+                },
+              ],
+            },
+          ],
+        },
+        {
+          tag: "hbox",
+          id: makeId("defcustomerlist"),
+          attributes: {
+            flex: "1",
+            align: "center",
+          },
+          properties: {
+            maxHeight: 30,
+            minHeight: 30,
+          },
+          children: [
+            {
+              tag: "div",
+              properties: {
+                innerHTML: getString("readerpanel.customer.default.label"),
+              },
+            },
+            {
+              tag: "menulist",
+              id: makeId("defcustomer"),
+              attributes: {
+                flex: "1",
+              },
+              listeners: [
+                {
+                  type: "command",
+                  listener: (e: Event) => {
+                    setPref("defCustomerDicts", (e.target as XUL.MenuList).value);
+                    addon.hooks.onReaderTabPaneCustomerDicts();
+                  },
+                },
+              ],
+              children: [
+                {
+                  tag: "menupopup",
+                  // children: DEF_CUSTOMER.map((lang) => ({
+                  //   tag: "menuitem",
+                  //   attributes: {
+                  //     label: lang.name,
+                  //     value: lang.key ,
+                  //   },
+                  // })),
+                },
+              ],
+            },
+          ],
+        },
+        {
+          tag: "hbox",
+          id: makeId("vipcustomerlist"),
+          attributes: {
+            flex: "1",
+            align: "center",
+          },
+          properties: {
+            maxHeight: 30,
+            minHeight: 30,
+          },
+          children: [
+            {
+              tag: "div",
+              properties: {
+                innerHTML: getString("readerpanel.customer.user.label"),
+              },
+            },
+            {
+              tag: "menulist",
+              id: makeId("vipcustomer"),
+              attributes: {
+                flex: "1",
+              },
+              listeners: [
+                {
+                  type: "command",
+                  listener: (e: Event) => {
+                    // setPref("useCustomerDicts", (e.target as XUL.MenuList).value);
+                    addon.hooks.onReaderTabPaneCustomerDicts();
+                  },
+                },
+              ],
+              children: [
+                {
+                  tag: "menupopup",
+                  children: [],
+                  // children: DEF_CUSTOMER.map((lang) => ({
+                  //   tag: "menuitem",
+                  //   attributes: {
+                  //     label: lang.name,
+                  //     value: lang.key ,
+                  //   },
+                  // })),
                 },
               ],
             },

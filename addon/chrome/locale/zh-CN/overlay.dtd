@@ -15,9 +15,6 @@
 <!ENTITY zotero.__addonRef__.pref.service.useWordService.label "使用字典服务翻译词语">
 <!ENTITY zotero.__addonRef__.pref.service.wordServices.label "字典服务">
 <!ENTITY zotero.__addonRef__.pref.service.wordServicesSecret.label "密钥">
-<!ENTITY zotero.__addonRef__.pref.service.langfrom.label "从">
-<!ENTITY zotero.__addonRef__.pref.service.langto.label "翻译到">
-<!ENTITY zotero.__addonRef__.pref.service.hint.label "带🗝️翻译服务需要密钥; 请参阅GitHub">
 
 <!ENTITY zotero.__addonRef__.help.feedback.caption.label "使用方法及问题反馈">
 <!ENTITY zotero.__addonRef__.help.feedback.label "GitHub">
