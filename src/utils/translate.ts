@@ -70,6 +70,8 @@ export interface TranslateTask {
   extraTasks: TranslateTask[] & { extraTasks: [] }[];
 
   dict_name?: string;
+  dict_user?: string;
+  uid?: string,
 }
 
 export type TranslateTaskProcessor = (
@@ -89,6 +91,14 @@ export class TranslateTaskRunner {
     const dict_name = getPref('defCustomerDicts') as string;
     if ( dict_name ) {
       data.dict_name = dict_name;
+    }
+    const dict_user = getPref('useCustomerDicts') as string;
+    if ( dict_user ) {
+      data.dict_user = dict_user;
+    }
+    const uid = getPref('user_id') as string;
+    if ( uid ) {
+      data.uid = uid;
     }
    
     // ***** add customer data *****

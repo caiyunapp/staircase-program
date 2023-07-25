@@ -1,4 +1,3 @@
-import { TranslateTaskProcessor } from "../../utils/translate";
 
 type CustomType = {
   key:string;
@@ -29,6 +28,5 @@ export default async function () {
     }
     result.push( custom );
   }
-  ztoolkit.log( '--- result')
   return result;
 };

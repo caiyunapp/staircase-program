@@ -3,15 +3,25 @@ import { config } from "../../package.json";
 import { LANG_CODE, SERVICES } from "../utils/config";
 import { getPref, setPref } from "../utils/prefs";
 import  GetDefCustomerDictsHttp from './services/customer_dicts';
+import  GetUserCustomerDictsHttp from './services/customer_users';
 import {
   addTranslateTask,
   getLastTranslateTask,
   putTranslateTaskAtHead,
 } from "../utils/translate";
 
+const UID = '5a326996adae20000c64d505';
+
 export async function registerReaderTabPanel() {
   const data:any = {};
   await updateReaderTabPanelsCustomerDicts(data);
+  const user:any = {};
+  if ( UID ) {
+    user['uid'] = UID;
+    await updateReaderTabPanelsUserCustomerDicts(user);
+    setPref('user_id',UID);
+  }
+  
   ztoolkit.ReaderTabPanel.register(
     getString("readerpanel.label"),
     (
@@ -24,20 +34,10 @@ export async function registerReaderTabPanel() {
       ztoolkit.log(data)
       setPref('defCustomerDictsList', JSON.stringify(data.result))
 
-      // updateReaderTabPanelsCustomerDicts().then( data => {
-      //   ztoolkit.log('=== setPref ===');
-      //   setPref('defCustomerDictsList', JSON.stringify(data))
-      //   ztoolkit.log('--- setPref ---');
-      //   if (ownerDeck.selectedPanel?.children[0].tagName === "vbox") {
-      //     panel = createPanel(ownerDeck, readerInstance._instanceID);
-      //   }
-      //   panel && buildPanel(panel, readerInstance._instanceID);
-      //   ztoolkit.log('=== over ===');
-      // }).catch(error => {
-      //   ztoolkit.log(error)
-      //   ztoolkit.log('---- error ----')
-      // })
-
+      if ( UID ) {
+        ztoolkit.log(user)
+        setPref('userCustomerDictsList', JSON.stringify(user.result))
+      }
 
       if (ownerDeck.selectedPanel?.children[0].tagName === "vbox") {
         panel = createPanel(ownerDeck, readerInstance._instanceID);
@@ -107,8 +107,13 @@ export function updateReaderTabPanels() {
   updateTextAreasSize(true);
 }
 
-export async function updateReaderTabPanelsCustomerDicts(data) {;
+export async function updateReaderTabPanelsCustomerDicts(data) {
   data.result =  await GetDefCustomerDictsHttp();
+  return data;
+}
+
+export async function updateReaderTabPanelsUserCustomerDicts(data) {
+  data.result =  await GetUserCustomerDictsHttp(data);
   return data;
 }
 
@@ -170,11 +175,12 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
     return;
   }
 
-  const __data:any = getPref('defCustomerDictsList');
-  const DEF_CUSTOMER = JSON.parse(__data);
-  ztoolkit.log('--- get def customer dicts list ---')
-  ztoolkit.log(DEF_CUSTOMER)
-  ztoolkit.log(typeof(DEF_CUSTOMER))
+  const __data1:any = getPref('defCustomerDictsList');
+  const DEF_CUSTOMER = JSON.parse(__data1);
+  const __data2:any = getPref('userCustomerDictsList');
+  const USER_CUSTOMER = JSON.parse(__data2);
+
+  ztoolkit.log(USER_CUSTOMER)
 
   ztoolkit.UI.appendElement(
     {
@@ -447,7 +453,7 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
                 {
                   type: "command",
                   listener: (e: Event) => {
-                    // setPref("useCustomerDicts", (e.target as XUL.MenuList).value);
+                    setPref("useCustomerDicts", (e.target as XUL.MenuList).value);
                     addon.hooks.onReaderTabPaneCustomerDicts();
                   },
                 },
@@ -455,14 +461,13 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
               children: [
                 {
                   tag: "menupopup",
-                  children: [],
-                  // children: DEF_CUSTOMER.map((lang) => ({
-                  //   tag: "menuitem",
-                  //   attributes: {
-                  //     label: lang.name,
-                  //     value: lang.key ,
-                  //   },
-                  // })),
+                  children: USER_CUSTOMER.map((lang:any) => ({
+                    tag: "menuitem",
+                    attributes: {
+                      label: lang.name,
+                      value: lang.name ,
+                    },
+                  })),
                 },
               ],
             },
