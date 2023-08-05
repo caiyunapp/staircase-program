@@ -107,12 +107,12 @@ export function updateReaderTabPanels() {
   updateTextAreasSize(true);
 }
 
-export async function updateReaderTabPanelsCustomerDicts(data) {
+export async function updateReaderTabPanelsCustomerDicts(data:any) {
   data.result =  await GetDefCustomerDictsHttp();
   return data;
 }
 
-export async function updateReaderTabPanelsUserCustomerDicts(data) {
+export async function updateReaderTabPanelsUserCustomerDicts(data:any) {
   data.result =  await GetUserCustomerDictsHttp(data);
   return data;
 }
