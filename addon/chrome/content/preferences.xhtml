@@ -70,10 +70,39 @@
     </hbox>
   </groupbox>
   <groupbox>
+    <label><html:h2>&zotero.__addonRef__.pref.caiyunUser.label;</html:h2></label>
+    <hbox>
+      <label
+        value="&zotero.__addonRef__.pref.caiyunUserAccount.label;"
+      ></label>
+      <!-- Replace -->
+      <html:input
+        type="text"
+        id="__addonRef__-caiyunUserAccount"
+      ></html:input>
+      <button id="__addonRef__-caiyunUserSendCode">发送验证码</button>
+    </hbox>
+    <hbox>
+      <label value="&zotero.__addonRef__.pref.caiyunUserCode.label;"></label>
+      <!-- Replace -->
+      <html:input
+        type="text"
+        id="__addonRef__-caiyunUserCode"
+      ></html:input>
+    </hbox>
+    <hbox>
+      <button id="__addonRef__-caiyunUserLogin">登录</button>
+    </hbox>
+    <hbox>
+      <label value="&zotero.__addonRef__.pref.caiyunLoginSuccess.label;"></label>
+      <button id="__addonRef__-caiyunUserLogOut">退出登录</button>
+    </hbox>
+    <label value="&zotero.__addonRef__.pref.caiyunUserDescrption.label;"></label>
+  </groupbox>
+  <groupbox>
     <label><html:h2>&zotero.__addonRef__.pref.service.label;</html:h2></label>
     <hbox>
       <label
-        id="tttest"
         value="&zotero.__addonRef__.pref.service.sentenceServices.label;"
       ></label>
       <!-- Replace -->

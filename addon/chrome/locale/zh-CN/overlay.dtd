@@ -10,6 +10,14 @@
 <!ENTITY zotero.__addonRef__.pref.audio.autoPlay "自动播放发音">
 <!ENTITY zotero.__addonRef__.pref.audio.showPlayBtn "弹窗中显示播放键">
 
+
+<!ENTITY zotero.__addonRef__.pref.caiyunUser.label "小译用户">
+<!ENTITY zotero.__addonRef__.pref.caiyunUserAccount.label "手机号">
+<!ENTITY zotero.__addonRef__.pref.caiyunUserCode.label "验证码">
+<!ENTITY zotero.__addonRef__.pref.caiyunUserDescrption.label "更多内容请访问彩云小译网站">
+<!ENTITY zotero.__addonRef__.pref.caiyunLoginSuccess.label "已登录">
+
+
 <!ENTITY zotero.__addonRef__.pref.service.label "服务">
 <!ENTITY zotero.__addonRef__.pref.service.sentenceServices.label "翻译服务">
 <!ENTITY zotero.__addonRef__.pref.service.sentenceServicesSecret.label "密钥">

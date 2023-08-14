@@ -35,34 +35,34 @@ export function setDefaultPrefSettings() {
     setPref("extraEngines", extraServices.slice(1));
   }
 
-  // For NiuTrans login. niutransLog is deprecated.
-  const niutransApiKey = getPref("niutransApikey") as string;
-  if (niutransApiKey) {
-    setServiceSecret("niutranspro", niutransApiKey);
-    clearPref("niutransApikey");
+  // For NiuTrans login. caiyuntransLog is deprecated.
+  const caiyuntransApiKey = getPref("caiyuntransApikey") as string;
+  if (caiyuntransApiKey) {
+    setServiceSecret("caiyun", caiyuntransApiKey);
+    clearPref("caiyuntransApikey");
   }
-  if (getPref("translateSource") === "niutransLog") {
-    setPref("translateSource", "niutranspro");
+  if (getPref("translateSource") === "caiyuntransLog") {
+    setPref("translateSource", "caiyun");
   }
   try {
     const oldDict = JSON.parse(
-      (getPref("niutransDictLibList") as string) || "{}"
+      (getPref("caiyuntransDictLibList") as string) || "{}"
     );
     if (oldDict?.dlist) {
-      setPref("niutransDictLibList", JSON.stringify(oldDict.dlist));
+      setPref("caiyuntransDictLibList", JSON.stringify(oldDict.dlist));
     } else {
-      setPref("niutransDictLibList", "[]");
+      setPref("caiyuntransDictLibList", "[]");
     }
     const oldMemory = JSON.parse(
-      (getPref("niutransMemoryLibList") as string) || "{}"
+      (getPref("caiyuntransMemoryLibList") as string) || "{}"
     );
     if (oldMemory?.mlist) {
-      setPref("niutransMemoryLibList", JSON.stringify(oldMemory?.mlist));
+      setPref("caiyuntransMemoryLibList", JSON.stringify(oldMemory?.mlist));
     } else {
-      setPref("niutransMemoryLibList", "[]");
+      setPref("caiyuntransMemoryLibList", "[]");
     }
   } catch (e) {
-    setPref("niutransDictLibList", "[]");
-    setPref("niutransMemoryLibList", "[]");
+    setPref("caiyuntransDictLibList", "[]");
+    setPref("caiyuntransMemoryLibList", "[]");
   }
 }

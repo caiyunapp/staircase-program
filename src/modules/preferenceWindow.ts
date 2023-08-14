@@ -1,10 +1,11 @@
 import { config } from "../../package.json";
-import { getService, LANG_CODE, SERVICES } from "../utils/config";
+import { LANG_CODE, SERVICES } from "../utils/config";
 import { getString } from "../utils/locale";
 import { getPref, setPref } from "../utils/prefs";
+import { secretStatusButtonData } from "./settings";
+
 import {
   validateServiceSecret,
-  secretStatusButtonData,
   setServiceSecret,
 } from "../utils/translate";
 
