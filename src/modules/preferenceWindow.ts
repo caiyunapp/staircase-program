@@ -3,6 +3,9 @@ import { LANG_CODE, SERVICES } from "../utils/config";
 import { getString } from "../utils/locale";
 import { getPref, setPref } from "../utils/prefs";
 import { secretStatusButtonData } from "./settings";
+import { UID } from '../config/user';
+import { getService } from '../utils/config';
+
 
 import {
   validateServiceSecret,
@@ -21,13 +24,17 @@ export function registerPrefsWindow() {
 }
 
 export function registerPrefsScripts(_window: Window) {
+  ztoolkit.log('----- registerPrefsScripts -----')
   // This function is called when the prefs window is opened
   addon.data.prefs.window = _window;
+  ztoolkit.log('buildPrefsPane:start');
   buildPrefsPane();
+  ztoolkit.log('buildPrefsPane:over');
   updatePrefsPaneDefault();
 }
 
 function buildPrefsPane() {
+  ztoolkit.log('--- buildPrefsPane ----')
   const doc = addon.data.prefs.window?.document;
   if (!doc) {
     return;
@@ -67,40 +74,41 @@ function buildPrefsPane() {
     doc.querySelector(`#${makeId("sentenceServices-placeholder")}`)!
   );
 
-  ztoolkit.UI.replaceElement(
-    {
-      tag: "menulist",
-      id: makeId("wordServices"),
-      attributes: {
-        value: getPref("dictSource") as string,
-        native: "true",
-      },
-      classList: ["use-word-service"],
-      listeners: [
-        {
-          type: "command",
-          listener: (e: Event) => {
-            onPrefsEvents("setWordService");
-          },
-        },
-      ],
-      children: [
-        {
-          tag: "menupopup",
-          children: SERVICES.filter((service) => service.type === "word").map(
-            (service) => ({
-              tag: "menuitem",
-              attributes: {
-                label: getString(`service.${service.id}`),
-                value: service.id,
-              },
-            })
-          ),
-        },
-      ],
-    },
-    doc.querySelector(`#${makeId("wordServices-placeholder")}`)!
-  );
+  // ztoolkit.UI.replaceElement(
+  //   {
+  //     tag: "menulist",
+  //     id: makeId("wordServices"),
+  //     attributes: {
+  //       value: getPref("dictSource") as string,
+  //       native: "true",
+  //     },
+  //     classList: ["use-word-service"],
+  //     listeners: [
+  //       {
+  //         type: "command",
+  //         listener: (e: Event) => {
+  //           onPrefsEvents("setWordService");
+  //         },
+  //       },
+  //     ],
+  //     children: [
+  //       {
+  //         tag: "menupopup",
+  //         children: SERVICES.filter((service) => service.type === "word").map(
+  //           (service) => ({
+  //             tag: "menuitem",
+  //             attributes: {
+  //               label: getString(`service.${service.id}`),
+  //               value: service.id,
+  //             },
+  //           })
+  //         ),
+  //       },
+  //     ],
+  //   },
+  //   doc.querySelector(`#${makeId("wordServices-placeholder")}`)!
+  // );
+  // ztoolkit.log('menulist:over');
 
   ztoolkit.UI.replaceElement(
     {
@@ -183,13 +191,13 @@ function buildPrefsPane() {
     ?.addEventListener("command", (e: Event) => {
       onPrefsEvents("setAutoTranslateAnnotation");
     });
-
+  
   doc
     .querySelector(`#${makeId("enablePopup")}`)
     ?.addEventListener("command", (e: Event) => {
       onPrefsEvents("setEnablePopup");
     });
-
+  
   doc
     .querySelector(`#${makeId("enableAddToNote")}`)
     ?.addEventListener("command", (e: Event) => {
@@ -225,17 +233,34 @@ function buildPrefsPane() {
     ?.addEventListener("input", (e: Event) => {
       onPrefsEvents("updatelineHeight");
     });
+
+  doc
+    .querySelector(`#${makeId("caiyunUserAccount")}`)
+    ?.addEventListener("input", (e: Event) => {
+      onPrefsEvents("updateuseraccount");
+    });
+
+  doc
+    .querySelector(`#${makeId("caiyunUserCode")}`)
+    ?.addEventListener("input", (e: Event) => {
+      onPrefsEvents("updateusercode");
+    });
 }
 
 function updatePrefsPaneDefault() {
+  ztoolkit.log('update updatePrefsPaneDefault start')
   onPrefsEvents("setAutoTranslateAnnotation", false);
   onPrefsEvents("setEnablePopup", false);
   onPrefsEvents("setUseWordService", false);
   onPrefsEvents("setSentenceSecret", false);
   onPrefsEvents("setWordSecret", false);
+  ztoolkit.log('&& setWordSecret: over &&')
+  onPrefsEvents("updateUserStatus", false);
+  ztoolkit.log('update updatePrefsPaneDefault over')
 }
 
 function onPrefsEvents(type: string, fromElement: boolean = true) {
+  ztoolkit.log('type:' + type)
   const doc = addon.data.prefs.window?.document;
   if (!doc) {
     return;
@@ -248,6 +273,7 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
         (elem) => ((elem as XUL.Element & XUL.IDisabled).disabled = disabled)
       );
   };
+  ztoolkit.log('--- add switch:' + type + "----")
   switch (type) {
     case "setAutoTranslateSelection":
       addon.hooks.onReaderTabPanelRefresh();
@@ -380,23 +406,18 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
       }
       break;
     case "setWordSecret":
-      {
-        const serviceId = getPref("dictSource") as string;
-        const secretCheckResult = validateServiceSecret(
-          serviceId,
-          (validateResult) => {
-            if (fromElement && !validateResult.status) {
-              addon.data.prefs.window?.alert(
-                `You see this because the translation service ${serviceId} requires SECRET, which is NOT correctly set.\n\nDetails:\n${validateResult.info}`
-              );
-            }
-          }
-        );
-        (
-          doc.querySelector(
-            `#${makeId("wordServicesSecret")}`
-          ) as HTMLInputElement
-        ).value = secretCheckResult.secret;
+      { 
+        ztoolkit.log('add setWordSecret, is loading...')
+
+        const __serviceId = getService('caiyun')['defaultSecret'] || '';
+        const serviceId = __serviceId;
+
+        // const input = doc.querySelector(
+        //   `#${makeId("wordServicesSecret")}`
+        // ) as HTMLInputElement;
+        // ztoolkit.log(input);
+        // input.value = serviceId;
+        // ztoolkit.log(serviceId)
       }
       break;
     case "setSourceLanguage":
@@ -429,6 +450,28 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
       addon.hooks.onReaderPopupRefresh();
       addon.hooks.onReaderTabPanelRefresh();
       break;
+    case "updateUserStatus": 
+      ztoolkit.log('用户登录信息');
+      const box1 = doc.querySelector(
+        `#${makeId("caiyunNeedLogin")}`
+      ) as XUL.Box;
+      const box2 = doc.querySelector(
+        `#${makeId("caiyunIsLogin")}`
+      ) as XUL.Box;
+      if ( UID ) {
+        ztoolkit.log('用户登录');
+        showLogout(doc, box1, box2 );
+      } else {
+        ztoolkit.log('未登录')
+        showLogin(doc, box1, box2 );
+      }
+      break;
+    case "updateuseraccount":
+      ztoolkit.log('--- updateuseraccount ---')
+      break;
+    case "updateusercode":
+      ztoolkit.log('--- updateusercode ---')
+      break;
     default:
       return;
   }
@@ -436,4 +479,56 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
 
 function makeId(type: string) {
   return `${config.addonRef}-${type}`;
+}
+
+
+function showLogin(doc:Document, box1:HTMLElement, box2:HTMLElement ) {
+  box1.hidden = false;
+  box2.hidden = true; 
+  const loginButton = doc.querySelector(
+    `#${makeId("caiyunUserLogin")}`
+  ) as XUL.Button;
+  
+  const codeButton = doc.querySelector(
+    `#${makeId("caiyunUserSendCode")}`
+  ) as XUL.Button;
+
+  loginButton.onclick = ($event) => {
+    ztoolkit.log('login');
+    
+    const account = doc.querySelector(
+      `#${makeId("caiyunUserAccount")}`
+    ) as HTMLInputElement;
+    const __account = account.value;
+    console.log('account:' + __account);
+    const code = doc.querySelector(
+      `#${makeId("caiyunUserCode")}`
+    ) as HTMLInputElement;
+    const __code = code.value;
+    console.log('code:' + __code);
+
+
+    showLogout( doc,box1,box2 )
+
+  }
+
+  codeButton.onclick = ($event) => {
+    ztoolkit.log('code');
+    const account = doc.querySelector(
+      `#${makeId("caiyunUserAccount")}`
+    ) as HTMLInputElement;
+    const phone = account.value;
+    ztoolkit.log('account:' + phone);
+  }
+}
+function showLogout(doc:Document,  box1:HTMLElement, box2:HTMLElement  ) {
+  box1.hidden = true;
+  box2.hidden = false; 
+  const loginoutButton = doc.querySelector(
+    `#${makeId("caiyunUserLogOut")}`
+  ) as XUL.Button;
+  loginoutButton.onclick = () => {
+    ztoolkit.log('loginout');
+    showLogin(doc, box1, box2 );
+  }
 }

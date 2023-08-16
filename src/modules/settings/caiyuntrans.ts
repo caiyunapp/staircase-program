@@ -6,8 +6,6 @@ import { setServiceSecret } from "../../utils/secret";
 export async function caiyuntransStatusCallback(status: boolean) {
   const dictLibList = getPref("caiyuntransDictLibList") as string;
   const memoryLibList = getPref("caiyuntransMemoryLibList") as string;
-  const dictLibListObj = JSON.parse(dictLibList);
-  const memoryLibListObj = JSON.parse(memoryLibList);
   const signInOrRefresh = status ? "refresh" : "signin";
   const dialogData: { [key: string | number]: any } = {
     username: getPref("caiyuntransUsername"),

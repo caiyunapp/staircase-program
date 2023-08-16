@@ -9,6 +9,8 @@ export function initLocale() {
 }
 
 export function getString(localeString: string): string {
+  ztoolkit.log('----- getString -----')
+  ztoolkit.log(localeString)
   switch (localeString) {
     case "alt":
       return Zotero.isMac ? "⌥" : "Alt";

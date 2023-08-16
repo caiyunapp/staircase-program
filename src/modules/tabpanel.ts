@@ -9,8 +9,7 @@ import {
   getLastTranslateTask,
   putTranslateTaskAtHead,
 } from "../utils/translate";
-
-const UID = '5a326996adae20000c64d505';
+import { UID } from '../config/user';
 
 export async function registerReaderTabPanel() {
   const data:any = {};
