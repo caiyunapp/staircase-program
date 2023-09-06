@@ -70,36 +70,32 @@
     </hbox>
   </groupbox>
   <groupbox>
-    <label><html:h2>&zotero.__addonRef__.pref.caiyunUser.label;</html:h2></label>
-    <box id="__addonRef__-caiyunNeedLogin">
+    <label><html:h2>彩云小译账户</html:h2></label>
+    <box id="__addonRef__-caiyunAccount">
       <hbox>
         <label
-          value="&zotero.__addonRef__.pref.caiyunUserAccount.label;"
+          value="彩云小译个人ID"
         ></label>
-        <!-- Replace -->
         <html:input
           type="text"
-          id="__addonRef__-caiyunUserAccount"
+          id="__addonRef__-caiyunUserAccountIdValue"
         ></html:input>
-        <button id="__addonRef__-caiyunUserSendCode">发送验证码</button>
-      </hbox>
-      <hbox>
-        <label value="&zotero.__addonRef__.pref.caiyunUserCode.label;"></label>
-        <!-- Replace -->
-        <html:input
-          type="text"
-          id="__addonRef__-caiyunUserCode"
-        ></html:input>
-      </hbox>
-      <hbox>
-        <button id="__addonRef__-caiyunUserLogin">登录</button>
+        <button id="__addonRef__-caiyunIdtoUserid">使用</button>
       </hbox>
     </box>
-    <hbox id="__addonRef__-caiyunIsLogin">
-      <label value="&zotero.__addonRef__.pref.caiyunLoginSuccess.label;"></label>
-      <button id="__addonRef__-caiyunUserLogOut">退出登录</button>
-    </hbox>
-    <label value="&zotero.__addonRef__.pref.caiyunUserDescrption.label;"></label>
+    <box>
+      <hbox>
+        <label
+          value="点击前往获取个人ID"
+          class="zotero-text-link"
+          href="https://fanyi.caiyunapp.com/#/mine/personal"
+      ></label>
+      <label
+          value="(小译官网->个人中心->个人资料->复制 ID)"
+          class="zotero-text-descrption"
+      ></label>
+      </hbox>
+    </box>
   </groupbox>
   <groupbox>
     <label><html:h2>&zotero.__addonRef__.pref.service.label;</html:h2></label>
@@ -221,15 +217,6 @@
       preference="__prefsPrefix__.disabledLanguages"
     ></html:input>
   </hbox>
-  <hbox>
-    <label
-      value="&zotero.__addonRef__.pref.advanced.extraEngines.label;"
-    ></label>
-    <html:input
-      type="text"
-      preference="__prefsPrefix__.extraEngines"
-    ></html:input>
-  </hbox>
 </groupbox>
 <groupbox>
   <label><html:h2>&zotero.__addonRef__.pref.about.label;</html:h2></label>
@@ -240,12 +227,7 @@
     <label
       value="&zotero.__addonRef__.help.feedback.label;"
       class="zotero-text-link"
-      href="https://github.com/windingwind/zotero-pdf-translate/issues"
-    ></label>
-    <label
-      value="&zotero.__addonRef__.help.docs.label;"
-      class="zotero-text-link"
-      href="https://zotero.yuque.com/staff-gkhviy/pdf-trans"
+      href="https://fanyi.caiyunapp.com"
     ></label>
   </hbox>
 </groupbox>

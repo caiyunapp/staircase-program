@@ -29,9 +29,8 @@
 <!ENTITY zotero.__addonRef__.pref.service.hint.label "带🗝️翻译服务需要密钥; 请参阅GitHub">
 
 <!ENTITY zotero.__addonRef__.help.feedback.caption.label "使用方法及问题反馈">
-<!ENTITY zotero.__addonRef__.help.feedback.label "GitHub">
-<!ENTITY zotero.__addonRef__.help.docs.label "文档(中文)">
-<!ENTITY zotero.__addonRef__.help.version.label "Zotero PDF Translate 版本 __buildVersion__">
+<!ENTITY zotero.__addonRef__.help.feedback.label "https://fanyi.caiyunapp.com">
+<!ENTITY zotero.__addonRef__.help.version.label "彩云小译 Zotero 插件 V __buildVersion__">
 <!ENTITY zotero.__addonRef__.help.releasetime.label "Build __buildTime__">
 
 <!ENTITY zotero.__addonRef__.pref.interface.label "用户界面">
@@ -53,7 +52,6 @@
 <!ENTITY zotero.__addonRef__.pref.advanced.label "高级">
 <!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.label "对特定语言文件关闭自动翻译(用','分隔)">
 <!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.alert "重新打开文件/重启Zotero以应用更改。">
-<!ENTITY zotero.__addonRef__.pref.advanced.extraEngines.label "独立窗口额外翻译引擎(用','分隔)">
 <!ENTITY zotero.__addonRef__.pref.advanced.splitChar.label "分隔符(原文与翻译之间)">
 
 <!ENTITY zotero.__addonRef__.pref.about.label "关于">

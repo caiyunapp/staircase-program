@@ -131,17 +131,8 @@ export async function caiyuntransStatusCallback(status: boolean) {
     .addCell(4, 1, { tag: "fragment" }, false)
     .addCell(4, 2, { tag: "fragment" }, false);
 
-  if (status) {
-    dialog.addButton(
-      getString("service.caiyun.dialog.signout"),
-      "signout",
-    );
-  }
 
-  dialog
-    .addButton(getString("service.caiyun.dialog.close"), "close")
-    .open(getString("service.caiyun.dialog.title"));
-
+ 
   await dialogData.unloadLock?.promise;
   switch (dialogData._lastButtonId) {
     case "signin":

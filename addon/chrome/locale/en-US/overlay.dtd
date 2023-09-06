@@ -26,9 +26,8 @@
 <!ENTITY zotero.__addonRef__.pref.service.hint.label "Translate Engine with 🗝️ requires Secret; See GitHub for more information">
 
 <!ENTITY zotero.__addonRef__.help.feedback.caption.label "User Guide and Feedback">
-<!ENTITY zotero.__addonRef__.help.feedback.label "GitHub">
-<!ENTITY zotero.__addonRef__.help.docs.label "Documentation(ZH)">
-<!ENTITY zotero.__addonRef__.help.version.label "Zotero PDF Translate VERSION __buildVersion__">
+<!ENTITY zotero.__addonRef__.help.feedback.label "https://fanyi.caiyunapp.com">
+<!ENTITY zotero.__addonRef__.help.version.label "LingoClound Zotero Plugin V __buildVersion__">
 <!ENTITY zotero.__addonRef__.help.releasetime.label "Build __buildTime__">
 
 <!ENTITY zotero.__addonRef__.pref.interface.label "User Interface">
@@ -50,6 +49,5 @@
 <!ENTITY zotero.__addonRef__.pref.advanced.label "Advanced">
 <!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.label "Disable Automatic Translation when File Language is(split with ',')">
 <!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.alert "Reopen files/restart Zotero to apply.">
-<!ENTITY zotero.__addonRef__.pref.advanced.extraEngines.label "Extra engines in standalone window(split with ',')">
 
 <!ENTITY zotero.__addonRef__.pref.about.label "About">
