@@ -162,7 +162,6 @@ function createPanel(ownerDeck: XUL.Deck, refID: string) {
     },
     container
   );
-  ztoolkit.log('--- createPanel ---')
   return container.querySelector("tabpanel") as XUL.TabPanel;
 }
 
@@ -172,166 +171,6 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
   if (!force && panel.querySelector(`#${makeId("root")}`)) {
     return;
   }
-
-  const uid = getPref('caiyunUserid');
-  const UserStatus = [];
-  const Customer = [];
-  if ( uid ) {
-   
-    const avatar = getPref("caiyunUserAvatar");
-    const username = getPref("caiyunUserName");
-    const vip_type = getPref("caiyunUserVipType");
-    
-    UserStatus.push( {
-      tag: "image",
-      namespace: "xul",
-      id: makeId("user-avater"),
-      attributes: {
-        src: avatar,
-        width: '30px',
-        height: '30px',
-      },
-    });
-    UserStatus.push(  {
-      tag: "div",
-      id: makeId("user-name"),
-      properties: {
-        innerHTML: username,
-      },
-      styles: {
-        marginLeft: "10px",
-        marginTop: "8px",
-      },
-    },);
-    UserStatus.push({
-      tag: "text",
-      namespace: "xul",
-      attributes: {
-        src: 'https://fanyi.caiyunapp.com/assets/webtrs-banner.96d7d824.jpg',
-        width: '30px',
-        height: '30px',
-      },
-    });
-
-    if ( vip_type === 'vip' || vip_type==='svip') {
-      console.log('可以使用术语库');
-      const __data1:any = getPref('defCustomerDictsList');
-      const DEF_CUSTOMER = JSON.parse(__data1);
-      const __data2:any = getPref('userCustomerDictsList');
-      const USER_CUSTOMER = JSON.parse(__data2);
-    
-      Customer.push( {
-        tag: "hbox",
-        id: makeId("defcustomerlist"),
-        attributes: {
-          flex: "1",
-          align: "center",
-        },
-        properties: {
-          maxHeight: 30,
-          minHeight: 30,
-        },
-        children: [
-          {
-            tag: "div",
-            properties: {
-              innerHTML: getString("readerpanel.customer.default.label"),
-            },
-          },
-          {
-            tag: "menulist",
-            id: makeId("defcustomer"),
-            attributes: {
-              flex: "1",
-            },
-            listeners: [
-              {
-                type: "command",
-                listener: (e: Event) => {
-                 
-                  setPref("defCustomerDicts", (e.target as XUL.MenuList).value);
-                  addon.hooks.onReaderTabPaneCustomerDicts();
-                  ztoolkit.log('listener defCustomerDicts:')
-                  ztoolkit.log((e.target as XUL.MenuList).value)
-                },
-              },
-            ],
-            children: [
-              {
-                tag: "menupopup",
-                children: DEF_CUSTOMER.map((lang:any) => ({
-                  tag: "menuitem",
-                  attributes: {
-                    label: lang.name,
-                    value: lang.key ,
-                  },
-                })),
-              },
-            ],
-          },
-        ],
-      },);
-      Customer.push( 
-        {
-          tag: "hbox",
-          id: makeId("vipcustomerlist"),
-          attributes: {
-            flex: "1",
-            align: "center",
-          },
-          properties: {
-            maxHeight: 30,
-            minHeight: 30,
-          },
-          children: [
-            {
-              tag: "div",
-              properties: {
-                innerHTML: getString("readerpanel.customer.user.label"),
-              },
-            },
-            {
-              tag: "menulist",
-              id: makeId("vipcustomer"),
-              attributes: {
-                flex: "1",
-              },
-              listeners: [
-                {
-                  type: "command",
-                  listener: (e: Event) => {
-                    setPref("useCustomerDicts", (e.target as XUL.MenuList).value);
-                    addon.hooks.onReaderTabPaneCustomerDicts();
-                  },
-                },
-              ],
-              children: [
-                {
-                  tag: "menupopup",
-                  children: USER_CUSTOMER.map((lang:any) => ({
-                    tag: "menuitem",
-                    attributes: {
-                      label: lang.name,
-                      value: lang.name ,
-                    },
-                  })),
-                },
-              ],
-            },
-          ],
-        },)
-
-
-    
-    
-    
-    
-    }
-  } else {
-    
-  
-  }
- 
 
   ztoolkit.UI.appendElement(
     {
@@ -355,7 +194,25 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
             marginTop: "1px",
             marginBottom: "1px",
           },
-          children: UserStatus,
+          children: [],
+        },
+        {
+          tag: "hbox",
+          id: makeId("defcustomerlist"),
+          attributes: {
+            flex: "1",
+            align: "center",
+          },
+          properties: {
+            maxHeight: 30,
+            minHeight: 30,
+          },
+          children: [{
+            tag: "div",
+            properties: {
+              innerHTML: getString("readerpanel.customer.default.label"),
+            },
+          }]   
         },
         {
           tag: "hbox",
@@ -871,7 +728,9 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
   updateTextAreaSize(panel);
   recordPanel(panel);
 
-  ztoolkit.log('--- buildPanel ---')
+  ztoolkit.log('--- buildPanel ---');
+
+  updateLoginPanel(panel, refID);
 }
 
 function buildExtraPanel(panel: XUL.Box) {
@@ -1099,6 +958,209 @@ function buildExtraPanel(panel: XUL.Box) {
     },
     panel
   );
+}
+
+function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = false) {
+  const makeId = (type: string) => `${config.addonRef}-${refID}-panel-${type}`;
+  const uid = getPref('caiyunUserid');
+  const UserStatus = [];
+  const Customer = [];
+  if ( uid ) {
+   
+    const avatar = getPref("caiyunUserAvatar");
+    const username = getPref("caiyunUserName");
+    const vip_type = getPref("caiyunUserVipType");
+    
+    UserStatus.push( {
+      tag: "image",
+      namespace: "xul",
+      id: makeId("user-avater"),
+      attributes: {
+        src: avatar,
+        width: '30px',
+        height: '30px',
+      },
+    });
+    UserStatus.push(  {
+      tag: "div",
+      id: makeId("user-name"),
+      properties: {
+        innerHTML: username,
+      },
+      styles: {
+        marginLeft: "10px",
+        marginTop: "8px",
+      },
+    },);
+    UserStatus.push({
+      tag: "text",
+      namespace: "xul",
+      attributes: {
+        src: 'https://fanyi.caiyunapp.com/assets/webtrs-banner.96d7d824.jpg',
+        width: '30px',
+        height: '30px',
+      },
+    });
+
+    if ( vip_type === 'vip' || vip_type==='svip') {
+      const __data1:any = getPref('defCustomerDictsList');
+      const DEF_CUSTOMER = JSON.parse(__data1);
+      const __data2:any = getPref('userCustomerDictsList');
+      const USER_CUSTOMER = JSON.parse(__data2);
+    
+      Customer.push( {
+        tag: "hbox",
+        id: makeId("defcustomerlist"),
+        attributes: {
+          flex: "1",
+          align: "center",
+        },
+        properties: {
+          maxHeight: 30,
+          minHeight: 30,
+        },
+        children: [
+          {
+            tag: "div",
+            properties: {
+              innerHTML: getString("readerpanel.customer.default.label"),
+            },
+          },
+          {
+            tag: "menulist",
+            id: makeId("defcustomer"),
+            attributes: {
+              flex: "1",
+            },
+            listeners: [
+              {
+                type: "command",
+                listener: (e: Event) => {
+                 
+                  setPref("defCustomerDicts", (e.target as XUL.MenuList).value);
+                  addon.hooks.onReaderTabPaneCustomerDicts();
+                  ztoolkit.log('listener defCustomerDicts:')
+                  ztoolkit.log((e.target as XUL.MenuList).value)
+                },
+              },
+            ],
+            children: [
+              {
+                tag: "menupopup",
+                children: DEF_CUSTOMER.map((lang:any) => ({
+                  tag: "menuitem",
+                  attributes: {
+                    label: lang.name,
+                    value: lang.key ,
+                  },
+                })),
+              },
+            ],
+          },
+        ],
+      },);
+      Customer.push( 
+        {
+          tag: "hbox",
+          id: makeId("vipcustomerlist"),
+          attributes: {
+            flex: "1",
+            align: "center",
+          },
+          properties: {
+            maxHeight: 30,
+            minHeight: 30,
+          },
+          children: [
+            {
+              tag: "div",
+              properties: {
+                innerHTML: getString("readerpanel.customer.user.label"),
+              },
+            },
+            {
+              tag: "menulist",
+              id: makeId("vipcustomer"),
+              attributes: {
+                flex: "1",
+              },
+              listeners: [
+                {
+                  type: "command",
+                  listener: (e: Event) => {
+                    setPref("useCustomerDicts", (e.target as XUL.MenuList).value);
+                    addon.hooks.onReaderTabPaneCustomerDicts();
+                  },
+                },
+              ],
+              children: [
+                {
+                  tag: "menupopup",
+                  children: USER_CUSTOMER.map((lang:any) => ({
+                    tag: "menuitem",
+                    attributes: {
+                      label: lang.name,
+                      value: lang.name ,
+                    },
+                  })),
+                },
+              ],
+            },
+          ],
+        },)
+    }
+  } else {
+    Customer.push({
+      tag: "hbox",
+      id: makeId("vipcustomerlist"),
+      attributes: {
+        flex: "1",
+        align: "center",
+      },
+      properties: {
+        maxHeight: 30,
+        minHeight: 30,
+      },
+      children: [{
+        tag: "div",
+        properties: {
+          innerHTML: getString("readerpanel.customer.default.label"),
+        },
+      },
+      {
+        tag: "a",
+        properties: {
+          href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
+          innerHTML: getString("readerpanel.customer.open_default"),
+        },
+      }]
+    })
+    Customer.push({
+      tag: "hbox",
+      id: makeId("vipcustomerlist"),
+      attributes: {
+        flex: "1",
+        align: "center",
+      },
+      properties: {
+        maxHeight: 30,
+        minHeight: 30,
+      },
+      children: [{
+        tag: "div",
+        properties: {
+          innerHTML: getString("readerpanel.customer.user.label"),
+        },
+      },
+      {
+        tag: "a",
+        properties: {
+          href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
+          innerHTML: getString("readerpanel.customer.open_user"),
+        },
+      }],
+    },)
+  }
 }
 
 function updatePanel(panel: HTMLElement) {
