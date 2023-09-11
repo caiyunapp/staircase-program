@@ -7,7 +7,6 @@ export function setDefaultPrefSettings() {
   const isZhCN = Zotero.locale === "zh-CN";
   const servicesIds = SERVICES.map((service) => service.id);
   if (!servicesIds.includes((getPref("translateSource") as string) || "")) {
-    // Google Translate is not accessible in China mainland
     setPref("translateSource", "caiyun");
   }
   if (!servicesIds.includes((getPref("dictSource") as string) || "")) {
@@ -39,7 +38,7 @@ export function setDefaultPrefSettings() {
   const caiyuntransApiKey = getPref("caiyuntransApikey") as string;
   if (caiyuntransApiKey) {
     setServiceSecret("caiyun", caiyuntransApiKey);
-    clearPref("caiyuntransApikey");
+    // clearPref("caiyuntransApikey");
   }
   if (getPref("translateSource") === "caiyuntransLog") {
     setPref("translateSource", "caiyun");
