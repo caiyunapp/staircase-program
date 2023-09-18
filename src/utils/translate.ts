@@ -96,11 +96,14 @@ export class TranslateTaskRunner {
     if ( dict_user ) {
       data.dict_user = dict_user;
     }
-    const uid = getPref('user_id') as string;
+    const uid = getPref('caiyunUserid') as string;
     if ( uid ) {
       data.uid = uid;
     }
-   
+    
+    ztoolkit.log(uid);
+    ztoolkit.log(getPref('caiyunUserid')); 
+
     // ***** add customer data *****
     data.secret = getServiceSecret(data.service);
     data.status = "processing";
