@@ -30,7 +30,7 @@
 <!ENTITY zotero.__addonRef__.help.version.label "LingoClound Zotero Plugin V __buildVersion__">
 <!ENTITY zotero.__addonRef__.help.releasetime.label "Build __buildTime__">
 
-<!ENTITY zotero.__addonRef__.pref.interface.label "User Interface">
+<!ENTITY zotero.__addonRef__.pref.interface.label "Configuration">
 <!ENTITY zotero.__addonRef__.pref.interface.fontSize.label "Font Size">
 <!ENTITY zotero.__addonRef__.pref.interface.lineHeight.label "Line Height">
 <!ENTITY zotero.__addonRef__.pref.interface.autoFocus.label "SideBar: Auto Focus">

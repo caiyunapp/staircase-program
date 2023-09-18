@@ -1,6 +1,6 @@
 <!ENTITY zotero.__addonRef__.pref.general.label "通用">
 <!ENTITY zotero.__addonRef__.pref.basic.enableAuto.label "自动翻译选择内容">
-<!ENTITY zotero.__addonRef__.pref.basic.enablePopup.label "启用弹窗">
+<!ENTITY zotero.__addonRef__.pref.basic.enablePopup.label "翻译时自动开启弹窗">
 <!ENTITY zotero.__addonRef__.pref.basic.enableHidePopupTextarea.label "隐藏翻译弹窗">
 <!ENTITY zotero.__addonRef__.pref.basic.enableComment.label "自动翻译批注">
 <!ENTITY zotero.__addonRef__.pref.basic.annotationTranslationInComment.label "存在笔记评论">
@@ -33,7 +33,7 @@
 <!ENTITY zotero.__addonRef__.help.version.label "彩云小译 Zotero 插件 V __buildVersion__">
 <!ENTITY zotero.__addonRef__.help.releasetime.label "Build __buildTime__">
 
-<!ENTITY zotero.__addonRef__.pref.interface.label "用户界面">
+<!ENTITY zotero.__addonRef__.pref.interface.label "通用">
 <!ENTITY zotero.__addonRef__.pref.interface.fontSize.label "字体大小">
 <!ENTITY zotero.__addonRef__.pref.interface.lineHeight.label "行高">
 <!ENTITY zotero.__addonRef__.pref.interface.autoFocus.label "侧边栏: 自动聚焦">
