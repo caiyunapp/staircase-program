@@ -26,119 +26,120 @@ export function registerPrefsWindow() {
 export function registerPrefsScripts(_window: Window) {
   // This function is called when the prefs window is opened
   addon.data.prefs.window = _window;
+
   buildPrefsPane();
   updatePrefsPaneDefault();
 }
 
 function buildPrefsPane() {
-  const doc = addon.data.prefs.window?.document;
+const doc = addon.data.prefs.window?.document;
   if (!doc) {
     return;
   }
-  // menus
-  ztoolkit.UI.replaceElement(
-    {
-      tag: "menulist",
-      id: makeId("sentenceServices"),
-      attributes: {
-        value: getPref("translateSource") as string,
-        native: "true",
-      },
-      listeners: [
-        {
-          type: "command",
-          listener: (e: Event) => {
-            onPrefsEvents("setSentenceService");
-          },
-        },
-      ],
-      children: [
-        {
-          tag: "menupopup",
-          children: SERVICES.filter(
-            (service) => service.type === "sentence"
-          ).map((service) => ({
-            tag: "menuitem",
-            attributes: {
-              label: getString(`service.${service.id}`),
-              value: service.id,
-            },
-          })),
-        },
-      ],
-    },
-    doc.querySelector(`#${makeId("sentenceServices-placeholder")}`)!
-  );
+  // // menus
+  // ztoolkit.UI.replaceElement(
+  //   {
+  //     tag: "menulist",
+  //     id: makeId("sentenceServices"),
+  //     attributes: {
+  //       value: getPref("translateSource") as string,
+  //       native: "true",
+  //     },
+  //     listeners: [
+  //       {
+  //         type: "command",
+  //         listener: (e: Event) => {
+  //           onPrefsEvents("setSentenceService");
+  //         },
+  //       },
+  //     ],
+  //     children: [
+  //       {
+  //         tag: "menupopup",
+  //         children: SERVICES.filter(
+  //           (service) => service.type === "sentence"
+  //         ).map((service) => ({
+  //           tag: "menuitem",
+  //           attributes: {
+  //             label: getString(`service.${service.id}`),
+  //             value: service.id,
+  //           },
+  //         })),
+  //       },
+  //     ],
+  //   },
+  //   doc.querySelector(`#${makeId("sentenceServices-placeholder")}`)!
+  // );
 
-  ztoolkit.UI.replaceElement(
-    {
-      tag: "menulist",
-      id: makeId("langfrom"),
-      attributes: {
-        value: getPref("sourceLanguage") as string,
-        native: "true",
-      },
-      listeners: [
-        {
-          type: "command",
-          listener: (e: Event) => {
-            onPrefsEvents("setSourceLanguage");
-          },
-        },
-      ],
-      styles: {
-        maxWidth: "250px",
-      },
-      children: [
-        {
-          tag: "menupopup",
-          children: LANG_CODE.map((lang) => ({
-            tag: "menuitem",
-            attributes: {
-              label: lang.name,
-              value: lang.code,
-            },
-          })),
-        },
-      ],
-    },
-    doc.querySelector(`#${makeId("langfrom-placeholder")}`)!
-  );
+  // ztoolkit.UI.replaceElement(
+  //   {
+  //     tag: "menulist",
+  //     id: makeId("langfrom"),
+  //     attributes: {
+  //       value: getPref("sourceLanguage") as string,
+  //       native: "true",
+  //     },
+  //     listeners: [
+  //       {
+  //         type: "command",
+  //         listener: (e: Event) => {
+  //           onPrefsEvents("setSourceLanguage");
+  //         },
+  //       },
+  //     ],
+  //     styles: {
+  //       maxWidth: "250px",
+  //     },
+  //     children: [
+  //       {
+  //         tag: "menupopup",
+  //         children: LANG_CODE.map((lang) => ({
+  //           tag: "menuitem",
+  //           attributes: {
+  //             label: lang.name,
+  //             value: lang.code,
+  //           },
+  //         })),
+  //       },
+  //     ],
+  //   },
+  //   doc.querySelector(`#${makeId("langfrom-placeholder")}`)!
+  // );
 
-  ztoolkit.UI.replaceElement(
-    {
-      tag: "menulist",
-      id: makeId("langto"),
-      attributes: {
-        value: getPref("targetLanguage") as string,
-        native: "true",
-      },
-      listeners: [
-        {
-          type: "command",
-          listener: (e: Event) => {
-            onPrefsEvents("setTargetLanguage");
-          },
-        },
-      ],
-      styles: {
-        maxWidth: "250px",
-      },
-      children: [
-        {
-          tag: "menupopup",
-          children: LANG_CODE.map((lang) => ({
-            tag: "menuitem",
-            attributes: {
-              label: lang.name,
-              value: lang.code,
-            },
-          })),
-        },
-      ],
-    },
-    doc.querySelector(`#${makeId("langto-placeholder")}`)!
-  );
+  // ztoolkit.UI.replaceElement(
+  //   {
+  //     tag: "menulist",
+  //     id: makeId("langto"),
+  //     attributes: {
+  //       value: getPref("targetLanguage") as string,
+  //       native: "true",
+  //     },
+  //     listeners: [
+  //       {
+  //         type: "command",
+  //         listener: (e: Event) => {
+  //           onPrefsEvents("setTargetLanguage");
+  //         },
+  //       },
+  //     ],
+  //     styles: {
+  //       maxWidth: "250px",
+  //     },
+  //     children: [
+  //       {
+  //         tag: "menupopup",
+  //         children: LANG_CODE.map((lang) => ({
+  //           tag: "menuitem",
+  //           attributes: {
+  //             label: lang.name,
+  //             value: lang.code,
+  //           },
+  //         })),
+  //       },
+  //     ],
+  //   },
+  //   doc.querySelector(`#${makeId("langto-placeholder")}`)!
+  // );
 
   doc
     .querySelector(`#${makeId("enableAuto")}`)
@@ -146,41 +147,41 @@ function buildPrefsPane() {
       onPrefsEvents("setAutoTranslateSelection");
     });
 
-  doc
-    .querySelector(`#${makeId("enableComment")}`)
-    ?.addEventListener("command", (e: Event) => {
-      onPrefsEvents("setAutoTranslateAnnotation");
-    });
+  // doc
+  //   .querySelector(`#${makeId("enableComment")}`)
+  //   ?.addEventListener("command", (e: Event) => {
+  //     onPrefsEvents("setAutoTranslateAnnotation");
+  //   });
   
-  doc
-    .querySelector(`#${makeId("enablePopup")}`)
-    ?.addEventListener("command", (e: Event) => {
-      onPrefsEvents("setEnablePopup");
-    });
+  // doc
+  //   .querySelector(`#${makeId("enablePopup")}`)
+  //   ?.addEventListener("command", (e: Event) => {
+  //     onPrefsEvents("setEnablePopup");
+  //   });
   
-  doc
-    .querySelector(`#${makeId("enableAddToNote")}`)
-    ?.addEventListener("command", (e: Event) => {
-      onPrefsEvents("setEnableAddToNote");
-    });
+  // doc
+  //   .querySelector(`#${makeId("enableAddToNote")}`)
+  //   ?.addEventListener("command", (e: Event) => {
+  //     onPrefsEvents("setEnableAddToNote");
+  //   });
 
-  doc
-    .querySelector(`#${makeId("useWordService")}`)
-    ?.addEventListener("command", (e: Event) => {
-      onPrefsEvents("setUseWordService");
-    });
+  // doc
+  //   .querySelector(`#${makeId("useWordService")}`)
+  //   ?.addEventListener("command", (e: Event) => {
+  //     onPrefsEvents("setUseWordService");
+  //   });
 
-  doc
-    .querySelector(`#${makeId("sentenceServicesSecret")}`)
-    ?.addEventListener("input", (e: Event) => {
-      onPrefsEvents("updateSentenceSecret");
-    });
+  // doc
+  //   .querySelector(`#${makeId("sentenceServicesSecret")}`)
+  //   ?.addEventListener("input", (e: Event) => {
+  //     onPrefsEvents("updateSentenceSecret");
+  //   });
 
-  doc
-    .querySelector(`#${makeId("wordServicesSecret")}`)
-    ?.addEventListener("input", (e: Event) => {
-      onPrefsEvents("updateWordSecret");
-    });
+  // doc
+  //   .querySelector(`#${makeId("wordServicesSecret")}`)
+  //   ?.addEventListener("input", (e: Event) => {
+  //     onPrefsEvents("updateWordSecret");
+  //   });
 
   doc
     .querySelector(`#${makeId("fontSize")}`)
@@ -194,17 +195,27 @@ function buildPrefsPane() {
       onPrefsEvents("updatelineHeight");
     });
 
-  doc
-    .querySelector(`#${makeId("caiyunUserAccount")}`)
-    ?.addEventListener("input", (e: Event) => {
-      onPrefsEvents("updateuseraccount");
-    });
+  // doc
+  //   .querySelector(`#${makeId("caiyunUserAccount")}`)
+  //   ?.addEventListener("input", (e: Event) => {
+  //     onPrefsEvents("updateuseraccount");
+  //   });
 
-  doc
-    .querySelector(`#${makeId("caiyunUserCode")}`)
-    ?.addEventListener("input", (e: Event) => {
-      onPrefsEvents("updateusercode");
-    });
+  // doc
+  //   .querySelector(`#${makeId("caiyunUserCode")}`)
+  //   ?.addEventListener("input", (e: Event) => {
+  //     onPrefsEvents("updateusercode");
+  //   });
+    // ztoolkit.log('uid:12312312-----------3');
+    // addon.data.prefs.window?.alert(doc
+    //   .querySelector(`#${makeId("caiyunIdtoUserid")}`));
+
+    // doc
+    // .querySelector(`#${makeId("caiyunIdtoUserid")}`)
+    // ?.addEventListener("click", (e: Event) => {
+    //   onPrefsEvents("updateUserStatus");
+    // });
+    bindUseridView(doc);
 }
 
 function updatePrefsPaneDefault() {
@@ -213,7 +224,7 @@ function updatePrefsPaneDefault() {
   onPrefsEvents("setUseWordService", false);
   onPrefsEvents("setSentenceSecret", false);
   onPrefsEvents("setWordSecret", false);
-  onPrefsEvents("updateUserStatus", false);
+  // onPrefsEvents("updateUserStatus", false);
 }
 
 function onPrefsEvents(type: string, fromElement: boolean = true) {
@@ -405,6 +416,8 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
       addon.hooks.onReaderTabPanelRefresh();
       break;
     case "updateUserStatus": 
+    ztoolkit.log('uid:123123123');
+
       bindUseridView(doc);
       break;
     default:
@@ -417,16 +430,25 @@ function makeId(type: string) {
 }
 
 function bindUseridView(doc:Document) {
+
   const idButton = doc.querySelector(
     `#${makeId("caiyunIdtoUserid")}`
   ) as XUL.Button;
-  const value = doc.querySelector(
-    `#${makeId("caiyunUserAccountIdValue")}`  
-  )as any;
+ 
 
-  value.value = getPref("caiyunUserAccountIdValue") as string;
-  ztoolkit.log('uid:' + getPref("caiyunUserid"))
+  
+  // window.alert("hello:"+getPref("caiyunUserid"));
+
   idButton.addEventListener('click', async () => {
+
+    const value = doc.querySelector(
+      `#${makeId("caiyunUserAccountIdValue")}`  
+    )as any;
+  
+    value.value = getPref("caiyunUserAccountIdValue") as string;
+  ztoolkit.log('uid:' + getPref("caiyunUserid"))
+    // window.alert("222 hello:"+value.value);
+
     ztoolkit.log(value.value);
     const __val = value.value;
     if ( __val.length > 0 ) {
