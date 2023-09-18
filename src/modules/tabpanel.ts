@@ -194,7 +194,15 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
             marginTop: "1px",
             marginBottom: "1px",
           },
-          children: [],
+          children: [
+            {
+              tag: "div",
+              properties: {
+              innerHTML: "squirrelRao",
+            }
+          }
+
+          ],
         },
         {
           tag: "hbox",
