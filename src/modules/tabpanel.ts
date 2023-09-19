@@ -631,26 +631,24 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
 
   //operation pane
   UserStatus.push(
-
- 
-    {
-      tag: "hbox",
-      id: makeId("defcustomerlist"),
-      attributes: {
-        flex: "1",
-        align: "center",
-      },
-      properties: {
-        maxHeight: 30,
-        minHeight: 30,
-      },
-      children: [{
-        tag: "div",
-        properties: {
-          innerHTML: getString("readerpanel.customer.default.label"),
-        },
-      }]   
-    },
+    // {
+    //   tag: "hbox",
+    //   id: makeId("defcustomerlist"),
+    //   attributes: {
+    //     flex: "1",
+    //     align: "center",
+    //   },
+    //   properties: {
+    //     maxHeight: 30,
+    //     minHeight: 30,
+    //   },
+    //   children: [{
+    //     tag: "div",
+    //     properties: {
+    //       innerHTML: getString("readerpanel.customer.default.label"),
+    //     },
+    //   }]   
+    // },
     {
       tag: "hbox",
       id: makeId("engine"),
