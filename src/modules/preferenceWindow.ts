@@ -457,7 +457,7 @@ function bindUseridView(doc:Document) {
   
       setPref("caiyunUserAccountIdValue", value.value);
       if ( re && re['rc'] === 0 && re['user_id'] ) {
-        window.alert('更新成功')
+        addon.data.prefs.window?.alert('Zotero彩云小译插件翻译功能已激活！');
         setPref("caiyunUserid", re['user_id']);
         setPref("user_id",re['user_id']);
         await updateUserInfo( re['user_id'] );
@@ -465,10 +465,10 @@ function bindUseridView(doc:Document) {
         setPref("caiyunUserid", '');
         setPref("user_id","");
         setUserInfo('','','')
-        window.alert('无效个人ID')
+        addon.data.prefs.window?.alert('无效的彩云小译个人ID，请重新进行设置');
       }
     } else {
-      window.alert('未填写个人ID')
+      addon.data.prefs.window?.alert('未填写彩云小译个人ID，请重新进行设置');
       setPref("user_id","");
       setPref("caiyunUserid", '');
       setPref("user_id","");
