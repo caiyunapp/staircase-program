@@ -46,14 +46,14 @@ async function onStartup() {
   setDefaultPrefSettings();
 
   registerNotify(["item"]);
-  await registerReaderTabPanel();
   registerReaderInitializer();
   registerPrefsWindow();
   registerMenu();
-  await registerExtraColumns();
-  await registerItemBoxExtraRows();
   registerTitleRenderer();
   registerShortcuts();
+  await registerExtraColumns();
+  await registerItemBoxExtraRows();
+  await registerReaderTabPanel();
 
 }
 
@@ -190,7 +190,9 @@ function onReaderPopupRefresh() {
 }
 
 function onReaderTabPanelRefresh() {
+  // registerReaderTabPanel();
   updateReaderTabPanels();
+
 }
 
 function onReaderTabPaneCustomerDicts() {
