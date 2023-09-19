@@ -1,9 +1,9 @@
 {
-  "name": "lingocloud-pdf-translate",
+  "name": "lingocloud-translate",
   "version": "1.0.0",
-  "description": "lingocloud PDF translation for Zotero built-in PDF reader.",
+  "description": "集成于Zotero的彩云小译PDF翻译插件，支持小译翻译模型和术语库",
   "config": {
-    "addonName": "LingoCloud",
+    "addonName": "彩云小译",
     "addonID": "xiaoyi@caiyunapp.com",
     "addonRef": "LingoCloud",
     "prefsPrefix": "extensions.zotero.LingoCloud",
