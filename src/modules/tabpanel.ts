@@ -15,7 +15,7 @@ export async function registerReaderTabPanel() {
   const data:any = {};
 
 
-  const __uid = getPref('user_id');
+  const __uid = getPref('caiyunUserid');
   const user:any = {};
   if ( __uid ) {
     user['uid'] = __uid;

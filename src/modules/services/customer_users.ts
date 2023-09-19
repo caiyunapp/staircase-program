@@ -9,7 +9,7 @@ type CustomType = {
 export default async function ( data:any ) {
     const xhr = await Zotero.HTTP.request(
         "POST",
-        `https://api.interpreter.caiyunai.com/v1/user/${ data.uid }/dict/all?start=0&count=0`,
+        `https://api.interpreter.caiyunai.com/v1/user/${ data.uid }/dict/all`,
         {
             headers: {
                 "content-type": "application/json",

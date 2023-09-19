@@ -459,6 +459,7 @@ function bindUseridView(doc:Document) {
       if ( re && re['rc'] === 0 && re['user_id'] ) {
         window.alert('更新成功')
         setPref("caiyunUserid", re['user_id']);
+        setPref("user_id",re['user_id']);
         await updateUserInfo( re['user_id'] );
       } else {
         setPref("caiyunUserid", '');
