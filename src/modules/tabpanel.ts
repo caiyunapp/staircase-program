@@ -436,39 +436,66 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
     const avatar = getPref("caiyunUserAvatar");
     const username = getPref("caiyunUserName");
     const vip_type = getPref("caiyunUserVipType");
-    window.alert(avatar+"  "+username+"  "+vip_type);
+    // window.alert(avatar+"  "+username+"  "+vip_type);
+    UserStatus.push(
+      {
+        tag: "div",
+        id: makeId("temp"),
+        properties: {
+          innerHTML: " ",
+        },
+        styles: {
+          marginTop: "10px",
+        }
+      },
+    );
 
-    UserStatus.push( {
-      tag: "image",
-      namespace: "xul",
-      id: makeId("user-avater"),
-      attributes: {
-        src: avatar,
-        width: '30px',
-        height: '30px',
-      },
-    });
-    UserStatus.push(  {
-      tag: "div",
-      id: makeId("user-name"),
-      properties: {
-        innerHTML: username,
-      },
-      styles: {
-        marginLeft: "10px",
-        marginTop: "8px",
-      },
-    },);
-    UserStatus.push({
-      tag: "text",
-      namespace: "xul",
-      attributes: {
-        src: 'https://fanyi.caiyunapp.com/assets/webtrs-banner.96d7d824.jpg',
-        width: '30px',
-        height: '30px',
-      },
-    });
-
+    UserStatus.push( 
+      {
+        tag: "hbox",
+        id: makeId("user_info"),
+        attributes: {
+          flex: "1",
+          align: "center",
+        },
+        properties: {
+          maxHeight: 30,
+          minHeight: 30,
+        },
+        children: [
+          {
+            tag: "image",
+            namespace: "xul",
+            id: makeId("user-avater"),
+            attributes: {
+              src: avatar,
+              width: '35px',
+              height: '35px',
+            }
+          },
+          {
+            tag: "div",
+            id: makeId("user-name"),
+            properties: {
+              innerHTML: username,
+            },
+            styles: {
+              marginLeft: "10px",
+              marginTop: "5px",
+            },
+            // {
+            //   tag: "text",
+            //   namespace: "xul",
+            //   attributes: {
+            //     src: 'https://fanyi.caiyunapp.com/assets/webtrs-banner.96d7d824.jpg',
+            //     width: '30px',
+            //     height: '30px',
+            //   },
+            // }
+          },
+        ],
+      },)
+   
     if ( vip_type === 'vip' || vip_type==='svip') {
       const __data1:any = getPref('defCustomerDictsList');
       const DEF_CUSTOMER = JSON.parse(__data1);
