@@ -428,7 +428,7 @@ function buildExtraPanel(panel: XUL.Box) {
 function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = false) {
   const makeId = (type: string) => `${config.addonRef}-${refID}-panel-${type}`;
   const uid = getPref('caiyunUserid');
-  window.alert(uid)
+  // window.alert(uid)
   const UserStatus = [];
   // const Customer = [];
   if ( uid ) {
