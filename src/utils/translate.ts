@@ -113,14 +113,17 @@ export class TranslateTaskRunner {
       await this.processor(data as Required<TranslateTask>);
       data.status = "success";
     } catch (e) {
+      // window.alert(e);
       data.result = this.makeErrorInfo(data.service, String(e));
       data.status = "fail";
     }
   }
 
   protected makeErrorInfo(serviceId: string, detail: string) {
+    detail = "";
+    serviceId = "";
     return `${getString("service.errorPrefix")} ${getString(
-      `service.${serviceId}`
+      `${serviceId}`
     )}\n\n${detail}`;
   }
 }

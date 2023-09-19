@@ -224,7 +224,7 @@ function updatePrefsPaneDefault() {
   onPrefsEvents("setUseWordService", false);
   onPrefsEvents("setSentenceSecret", false);
   onPrefsEvents("setWordSecret", false);
-  // onPrefsEvents("updateUserStatus", false);
+  onPrefsEvents("updateUserStatus", false);
 }
 
 function onPrefsEvents(type: string, fromElement: boolean = true) {
@@ -446,7 +446,7 @@ function bindUseridView(doc:Document) {
     )as any;
   
     value.value = getPref("caiyunUserAccountIdValue") as string;
-  ztoolkit.log('uid:' + getPref("caiyunUserid"))
+  ztoolkit.log('uid:' + value.value)
     // window.alert("222 hello:"+value.value);
 
     ztoolkit.log(value.value);
@@ -463,11 +463,16 @@ function bindUseridView(doc:Document) {
         await updateUserInfo( re['user_id'] );
       } else {
         setPref("caiyunUserid", '');
+        setPref("user_id","");
         setUserInfo('','','')
         window.alert('无效个人ID')
       }
     } else {
       window.alert('未填写个人ID')
+      setPref("user_id","");
+      setPref("caiyunUserid", '');
+      setPref("user_id","");
+      setUserInfo('','','')
     }
   })
 }

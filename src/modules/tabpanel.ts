@@ -10,6 +10,7 @@ import {
   putTranslateTaskAtHead,
 } from "../utils/translate";
 import { get } from "http";
+import { link } from "fs";
 
 export async function registerReaderTabPanel() {
   const data:any = {};
@@ -602,6 +603,35 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             },
           ],
         },)
+    }else{
+      UserStatus.push({
+        tag: "hbox",
+        id: makeId("vipcustomerlist"),
+        attributes: {
+          flex: "1",
+          align: "center",
+        },
+        properties: {
+          maxHeight: 30,
+          minHeight: 30,
+        },
+        children: [
+          {
+          tag: "button",
+          properties: {
+            innerHTML: getString("readerpanel.customer.no_vip.label"),
+          },
+        },
+        {
+          tag: "div",
+          properties: {
+            // href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
+            innerHTML: getString("readerpanel.customer.open_default"),
+            marginLeft: "5px",
+          }
+        }
+      ]
+      })
     }
   } else {
     UserStatus.push({
@@ -615,45 +645,48 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         maxHeight: 30,
         minHeight: 30,
       },
-      children: [{
+      children: [
+      //   {
+      //   tag: "div",
+      //   properties: {
+      //     innerHTML: getString("readerpanel.customer.default.label"),
+      //   },
+      // },
+      {
         tag: "div",
         properties: {
-          innerHTML: getString("readerpanel.customer.default.label"),
-        },
-      },
-      {
-        tag: "a",
-        properties: {
-          href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
-          innerHTML: getString("readerpanel.customer.open_default"),
-        },
-      }]
+          // href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
+          innerHTML: getString("readerpanel.customer.id_invalid"),
+        }
+       
+      }
+    ]
     })
-    UserStatus.push({
-      tag: "hbox",
-      id: makeId("vipcustomerlist"),
-      attributes: {
-        flex: "1",
-        align: "center",
-      },
-      properties: {
-        maxHeight: 30,
-        minHeight: 30,
-      },
-      children: [{
-        tag: "div",
-        properties: {
-          innerHTML: getString("readerpanel.customer.user.label"),
-        },
-      },
-      {
-        tag: "a",
-        properties: {
-          href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
-          innerHTML: getString("readerpanel.customer.open_user"),
-        },
-      }],
-    },)
+    // UserStatus.push({
+    //   tag: "hbox",
+    //   id: makeId("vipcustomerlist"),
+    //   attributes: {
+    //     flex: "1",
+    //     align: "center",
+    //   },
+    //   properties: {
+    //     maxHeight: 30,
+    //     minHeight: 30,
+    //   },
+    //   children: [{
+    //     tag: "div",
+    //     properties: {
+    //       innerHTML: getString("readerpanel.customer.user.label"),
+    //     },
+    //   },
+    //   {
+    //     tag: "a",
+    //     properties: {
+    //       href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
+    //       innerHTML: getString("readerpanel.customer.open_user"),
+    //     },
+    //   }],
+    // },)
   }
 
   //operation pane
