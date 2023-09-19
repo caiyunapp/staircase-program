@@ -28,7 +28,7 @@
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "caiyunapp",
+  "author": "彩云小译",
   "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://support.qq.com/products/107129/"
