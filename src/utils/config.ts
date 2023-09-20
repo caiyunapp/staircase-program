@@ -12,9 +12,15 @@ export interface SecretValidateResult {
 }
 
 export const SERVICES: Readonly<Readonly<TranslateService>[]> = <const>[
+  
   {
     type: "sentence",
-    id: "caiyun",
+    id: "caiyun_common",
+    defaultSecret: "3975l6lr5pcbvidl6jl2",
+  },
+  {
+    type: "sentence",
+    id: "caiyun_research",
     defaultSecret: "3975l6lr5pcbvidl6jl2",
   },
 ];
@@ -24,13 +30,23 @@ export function getService(id: string) {
 }
 
 export const LANG_CODE = <const>[
-  { code: "ru", name: "Russian" },
-  { code: "fr", name: "French" },
-  { code: "es", name: "Spanish" },
-  { code: "en", name: "English" },
-  { code: "ja", name: "Japanese" },
-  { code: "ko", name: "Korean" },
-  { code: "zh", name: "Chinese" },
+  // { code: "ru", name: "Russian" },
+  // { code: "fr", name: "French" },
+  // { code: "es", name: "Spanish" },
+  { code: "en", name: "英文" },
+  // { code: "ja", name: "Japanese" },
+  // { code: "ko", name: "Korean" },
+  // { code: "zh", name: "Chinese" },
+];
+
+export const TARGET_LANG_CODE = <const>[
+  // { code: "ru", name: "Russian" },
+  // { code: "fr", name: "French" },
+  { code: "zh", name: "中文" },
+  // { code: "es", name: "Spanish" },
+  // { code: "en", name: "English" },
+  // { code: "ja", name: "Japanese" },
+  // { code: "ko", name: "Korean" },
 ];
 
 

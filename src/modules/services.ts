@@ -54,7 +54,10 @@ export class TranslationServices {
       addon.hooks.onReaderTabPanelRefresh();
     }
     // Get task runner
-    const runner = this[task.service] as TranslateTaskRunner;
+    ztoolkit.log(task.service);
+    ztoolkit.log(this);
+    // const runner = this[task.service] as TranslateTaskRunner;
+    const runner = this["caiyun"] as TranslateTaskRunner;
     if (!runner) {
       task.result = `${task.service} is not implemented.`;
       task.status = "fail";

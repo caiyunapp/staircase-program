@@ -138,6 +138,7 @@ async function onTranslate(
 ): Promise<void>;
 async function onTranslate(...data: any) {
   ztoolkit.log('---- onTranslate ----')
+  ztoolkit.log(data);
   let task = undefined;
   let options = {};
   if (data.length === 1) {
@@ -150,6 +151,8 @@ async function onTranslate(...data: any) {
     task = data[0];
     options = data[1];
   }
+  ztoolkit.log(task);
+  ztoolkit.log(options);
   await addon.data.translate.services.runTranslationTask(task, options);
 }
 

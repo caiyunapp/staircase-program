@@ -1,6 +1,6 @@
 import { getString } from "../utils/locale";
 import { config } from "../../package.json";
-import { LANG_CODE, SERVICES } from "../utils/config";
+import { LANG_CODE, TARGET_LANG_CODE,SERVICES } from "../utils/config";
 import { getPref, setPref } from "../utils/prefs";
 import  GetDefCustomerDictsHttp from './services/customer_dicts';
 import  GetUserCustomerDictsHttp from './services/customer_users';
@@ -879,7 +879,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
           children: [
             {
               tag: "menupopup",
-              children: LANG_CODE.map((lang) => ({
+              children: TARGET_LANG_CODE.map((lang) => ({
                 tag: "menuitem",
                 attributes: {
                   label: lang.name,

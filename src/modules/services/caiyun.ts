@@ -15,7 +15,13 @@ export default <TranslateTaskProcessor>async function (data) {
     detect: true,
     dict_name: {},
     user_id: data.uid,
+    context_mode:true
   }
+
+  if(data.service == "caiyun_research"){
+    json_data['model'] = "model_deep:v3l"
+  }
+   
 
   if ( dict_name ) {
     json_data['dict_name']['common_dict'] = [dict_name];
