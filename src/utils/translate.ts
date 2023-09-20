@@ -99,24 +99,28 @@ export class TranslateTaskRunner {
     const uid = getPref('caiyunUserid') as string;
     if ( uid ) {
       data.uid = uid;
-    }
-    
-    ztoolkit.log(uid);
-    ztoolkit.log(getPref('caiyunUserid')); 
-
-    // ***** add customer data *****
-    data.secret = getServiceSecret(data.service);
-    data.status = "processing";
-    try {
-      ztoolkit.log('http: data show')
-      ztoolkit.log(data);
-      await this.processor(data as Required<TranslateTask>);
-      data.status = "success";
-    } catch (e) {
-      // window.alert(e);
-      data.result = this.makeErrorInfo(data.service, String(e));
+      ztoolkit.log(uid);
+      ztoolkit.log(getPref('caiyunUserid')); 
+  
+      // ***** add customer data *****
+      data.secret = getServiceSecret(data.service);
+      data.status = "processing";
+      try {
+        ztoolkit.log('http: data show')
+        ztoolkit.log(data);
+        await this.processor(data as Required<TranslateTask>);
+        data.status = "success";
+      } catch (e) {
+        // window.alert(e);
+        data.result = this.makeErrorInfo(data.service, String(e));
+        data.status = "fail";
+      }
+    }else{
+      data.result = this.makeErrorInfo("","");
       data.status = "fail";
     }
+    
+   
   }
 
   protected makeErrorInfo(serviceId: string, detail: string) {

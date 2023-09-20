@@ -465,13 +465,14 @@ function bindUseridView(doc:Document) {
         setPref("caiyunUserid", '');
         setPref("user_id","");
         setUserInfo('','','')
+        setPref("caiyunUserAccountIdValue",'');
         addon.data.prefs.window?.alert('无效的彩云小译个人ID，请重新进行设置');
       }
     } else {
       addon.data.prefs.window?.alert('未填写彩云小译个人ID，请重新进行设置');
       setPref("user_id","");
-      setPref("caiyunUserid", '');
-      setPref("user_id","");
+      setPref("caiyunUserid","");
+      setPref("caiyunUserAccountIdValue",'');
       setUserInfo('','','')
     }
   })

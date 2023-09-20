@@ -24,6 +24,7 @@ export async function registerReaderTabPanel() {
     await updateReaderTabPanelsUserCustomerDicts(user);
   }
   
+
   ztoolkit.ReaderTabPanel.register(
     getString("readerpanel.label"),
     (
@@ -40,6 +41,8 @@ export async function registerReaderTabPanel() {
 
       if (ownerDeck.selectedPanel?.children[0].tagName === "vbox") {
         panel = createPanel(ownerDeck, readerInstance._instanceID);
+        registerReaderTabPanel();
+
       }
       panel && buildPanel(panel, readerInstance._instanceID);
     },
@@ -64,6 +67,7 @@ export async function registerReaderTabPanel() {
   updateTextAreasSize(true);
 
   ztoolkit.log('registerReaderTabPanel')
+  // registerReaderTabPanel();
 }
 
 async function openWindowPanel() {
@@ -196,7 +200,7 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
 
   ztoolkit.log('--- buildPanel ---');
 
-  // updateLoginPanel(panel, refID);
+  updateLoginPanel(panel, refID);
 }
 
 function buildExtraPanel(panel: XUL.Box) {
