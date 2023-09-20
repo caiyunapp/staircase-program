@@ -4,7 +4,7 @@
       "updates": [
         {
           "version": "1.0.0",
-          "update_link": "https://fanyi.caiyunapp.com",
+          "update_link": "https://fanyi.caiyunapp.com/zotero_addon/release/lingocloud-translate.xpi",
           "applications": {
             "gecko": {
               "strict_min_version": "60.0"
@@ -13,7 +13,7 @@
         },
         {
           "version": "1.0.0",
-          "update_link": "https://fanyi.caiyunapp.com",
+          "update_link": "https://fanyi.caiyunapp.com/zotero_addon/release/lingocloud-translate.xpi",
           "applications": {
             "zotero": {
               "strict_min_version": "6.999"
