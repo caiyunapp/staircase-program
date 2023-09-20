@@ -416,7 +416,6 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
       addon.hooks.onReaderTabPanelRefresh();
       break;
     case "updateUserStatus": 
-    ztoolkit.log('uid:123123123');
 
       bindUseridView(doc);
       break;
