@@ -502,173 +502,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
       },);
 
 
-    //翻译语种
-    UserStatus.push(
-      {
-        tag: "hbox",
-        id: makeId("lang"),
-        attributes: {
-          flex: "1",
-          align: "center",
-        },
-        properties: {
-          maxHeight: 30,
-          minHeight: 30,
-        },
-        children: [
-          {
-            tag: "div",
-            properties: {
-              innerHTML: getString("readerpanel.translan.default.label"),
-            },
-          },
-          {
-            tag: "menulist",
-            id: makeId("langfrom"),
-            attributes: {
-              flex: "1",
-            },
-            listeners: [
-              {
-                type: "command",
-                listener: (e: Event) => {
-                  setPref("sourceLanguage", (e.target as XUL.MenuList).value);
-                  addon.hooks.onReaderTabPanelRefresh();
-                  // ztoolkit.log("listeners langfrom:");
-                  // ztoolkit.log((e.target as XUL.MenuList).value);
-                },
-              },
-            ],
-            children: [
-              {
-                tag: "menupopup",
-                children: LANG_CODE.map((lang) => ({
-                  tag: "menuitem",
-                  attributes: {
-                    label: lang.name,
-                    value: lang.code,
-                  },
-                })),
-              },
-            ],
-          },
-          {
-            tag: "div",
-            properties: {
-              innerHTML: "↔️",
-            },
-            listeners: [
-              {
-                type: "click",
-                listener: () => {
-                  const langfrom = getPref("sourceLanguage") as string;
-                  const langto = getPref("targetLanguage") as string;
-                  setPref("targetLanguage", langfrom);
-                  setPref("sourceLanguage", langto);
-                  addon.hooks.onReaderTabPanelRefresh();
-                },
-              },
-            ],
-          },
-          {
-            tag: "menulist",
-            id: makeId("langto"),
-            attributes: {
-              flex: "1",
-            },
-            listeners: [
-              {
-                type: "command",
-                listener: (e: Event) => {
-                  setPref("targetLanguage", (e.target as XUL.MenuList).value);
-                  addon.hooks.onReaderTabPanelRefresh();
-                  // ztoolkit.log("listeners langto:");
-                  // ztoolkit.log((e.target as XUL.MenuList).value)
-                },
-              },
-            ],
-            children: [
-              {
-                tag: "menupopup",
-                children: TARGET_LANG_CODE.map((lang) => ({
-                  tag: "menuitem",
-                  attributes: {
-                    label: lang.name,
-                    value: lang.code,
-                  },
-                })),
-              },
-            ],
-          },
-        ], 
-      },
-    );
-
-
-    //模型
-    UserStatus.push(
-      {
-        tag: "hbox",
-        id: makeId("engine"),
-        attributes: {
-          flex: "1",
-          align: "center",
-        },
-        properties: {
-          maxHeight: 30,
-          minHeight: 30,
-        },
-        children: [
-          {
-            tag: "div",
-            properties: {
-              innerHTML: getString("readerpanel.transmodel.default.label"),
-            },
-          },
-          {
-            tag: "menulist",
-            id: makeId("services"),
-            attributes: {
-              flex: "1",
-            },
-            listeners: [
-              {
-                type: "command",
-                listener: (e: Event) => {
-                  const newService = (e.target as XUL.MenuList).value;
-                  setPref("translateSource", newService);
-                  addon.hooks.onReaderTabPanelRefresh();
-                  const data = getLastTranslateTask();
-                  return;
-                  // if (!data) {
-                  //   return;
-                  // }
-                  // data.service = newService;
-                  // addon.hooks.onTranslate(undefined, {
-                  //   noCheckZoteroItemLanguage: true,
-                  // });
-                },
-              },
-            ],
-            children: [
-              {
-                tag: "menupopup",
-                children: SERVICES.filter(
-                  (service) => service.type === "sentence"
-                ).map((service) => ({
-                  tag: "menuitem",
-                  attributes: {
-                    label: getString(`service.${service.id}`),
-                    value: service.id,
-                  },
-                })),
-              },
-            ],
-          }
-        ],
-      },
-
-      );
+    
     //术语库
    
     if ( vip_type === 'vip' || vip_type==='svip') {
@@ -807,7 +641,9 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
       ]
       })
     }
-  } else {
+
+  } 
+  if(!uid) {
     UserStatus.push({
       tag: "hbox",
       id: makeId("vipcustomerlist"),
@@ -838,6 +674,175 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
     })
     
   }
+  //翻译语种
+  UserStatus.push(
+    {
+      tag: "hbox",
+      id: makeId("lang"),
+      attributes: {
+        flex: "1",
+        align: "center",
+      },
+      properties: {
+        maxHeight: 30,
+        minHeight: 30,
+      },
+      children: [
+        {
+          tag: "div",
+          properties: {
+            innerHTML: getString("readerpanel.translan.default.label"),
+          },
+        },
+        {
+          tag: "menulist",
+          id: makeId("langfrom"),
+          attributes: {
+            flex: "1",
+          },
+          listeners: [
+            {
+              type: "command",
+              listener: (e: Event) => {
+                setPref("sourceLanguage", (e.target as XUL.MenuList).value);
+                addon.hooks.onReaderTabPanelRefresh();
+                // ztoolkit.log("listeners langfrom:");
+                // ztoolkit.log((e.target as XUL.MenuList).value);
+              },
+            },
+          ],
+          children: [
+            {
+              tag: "menupopup",
+              children: LANG_CODE.map((lang) => ({
+                tag: "menuitem",
+                attributes: {
+                  label: lang.name,
+                  value: lang.code,
+                },
+              })),
+            },
+          ],
+        },
+        {
+          tag: "div",
+          properties: {
+            innerHTML: "↔️",
+          },
+          listeners: [
+            {
+              type: "click",
+              listener: () => {
+                const langfrom = getPref("sourceLanguage") as string;
+                const langto = getPref("targetLanguage") as string;
+                setPref("targetLanguage", langfrom);
+                setPref("sourceLanguage", langto);
+                addon.hooks.onReaderTabPanelRefresh();
+              },
+            },
+          ],
+        },
+        {
+          tag: "menulist",
+          id: makeId("langto"),
+          attributes: {
+            flex: "1",
+          },
+          listeners: [
+            {
+              type: "command",
+              listener: (e: Event) => {
+                setPref("targetLanguage", (e.target as XUL.MenuList).value);
+                addon.hooks.onReaderTabPanelRefresh();
+                // ztoolkit.log("listeners langto:");
+                // ztoolkit.log((e.target as XUL.MenuList).value)
+              },
+            },
+          ],
+          children: [
+            {
+              tag: "menupopup",
+              children: TARGET_LANG_CODE.map((lang) => ({
+                tag: "menuitem",
+                attributes: {
+                  label: lang.name,
+                  value: lang.code,
+                },
+              })),
+            },
+          ],
+        },
+      ], 
+    },
+  );
+
+
+  //模型
+  UserStatus.push(
+    {
+      tag: "hbox",
+      id: makeId("engine"),
+      attributes: {
+        flex: "1",
+        align: "center",
+      },
+      properties: {
+        maxHeight: 30,
+        minHeight: 30,
+      },
+      children: [
+        {
+          tag: "div",
+          properties: {
+            innerHTML: getString("readerpanel.transmodel.default.label"),
+          },
+        },
+        {
+          tag: "menulist",
+          id: makeId("services"),
+          attributes: {
+            flex: "1",
+          },
+          listeners: [
+            {
+              type: "command",
+              listener: (e: Event) => {
+                const newService = (e.target as XUL.MenuList).value;
+                setPref("translateSource", newService);
+                addon.hooks.onReaderTabPanelRefresh();
+                const data = getLastTranslateTask();
+                return;
+                // if (!data) {
+                //   return;
+                // }
+                // data.service = newService;
+                // addon.hooks.onTranslate(undefined, {
+                //   noCheckZoteroItemLanguage: true,
+                // });
+              },
+            },
+          ],
+          children: [
+            {
+              tag: "menupopup",
+              children: SERVICES.filter(
+                (service) => service.type === "sentence"
+              ).map((service) => ({
+                tag: "menuitem",
+                attributes: {
+                  label: getString(`service.${service.id}`),
+                  value: service.id,
+                },
+              })),
+            },
+          ],
+        }
+      ],
+    },
+
+    );
+  
+ 
 
   //operation pane
   UserStatus.push(
