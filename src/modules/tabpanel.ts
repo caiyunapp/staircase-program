@@ -666,31 +666,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
       }
     ]
     })
-    // UserStatus.push({
-    //   tag: "hbox",
-    //   id: makeId("vipcustomerlist"),
-    //   attributes: {
-    //     flex: "1",
-    //     align: "center",
-    //   },
-    //   properties: {
-    //     maxHeight: 30,
-    //     minHeight: 30,
-    //   },
-    //   children: [{
-    //     tag: "div",
-    //     properties: {
-    //       innerHTML: getString("readerpanel.customer.user.label"),
-    //     },
-    //   },
-    //   {
-    //     tag: "a",
-    //     properties: {
-    //       href: "https://fanyi.caiyunapp.com/#/mine/vip/pay",
-    //       innerHTML: getString("readerpanel.customer.open_user"),
-    //     },
-    //   }],
-    // },)
+    
   }
 
   //operation pane
@@ -713,92 +689,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
     //     },
     //   }]   
     // },
-    {
-      tag: "hbox",
-      id: makeId("engine"),
-      attributes: {
-        flex: "1",
-        align: "center",
-      },
-      properties: {
-        maxHeight: 30,
-        minHeight: 30,
-      },
-      children: [
-        {
-          tag: "menulist",
-          id: makeId("services"),
-          attributes: {
-            flex: "1",
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e: Event) => {
-                const newService = (e.target as XUL.MenuList).value;
-                setPref("translateSource", newService);
-                addon.hooks.onReaderTabPanelRefresh();
-                const data = getLastTranslateTask();
-                if (!data) {
-                  return;
-                }
-                data.service = newService;
-                addon.hooks.onTranslate(undefined, {
-                  noCheckZoteroItemLanguage: true,
-                });
-              },
-            },
-          ],
-          children: [
-            {
-              tag: "menupopup",
-              children: SERVICES.filter(
-                (service) => service.type === "sentence"
-              ).map((service) => ({
-                tag: "menuitem",
-                attributes: {
-                  label: getString(`service.${service.id}`),
-                  value: service.id,
-                },
-              })),
-            },
-          ],
-        },
-        {
-          tag: "button",
-          namespace: "xul",
-          attributes: {
-            label: `${getString(
-              "readerpanel.translate.button.label"
-            )}(${getString("ctrl")} + T)`,
-            flex: "1",
-          },
-          listeners: [
-            {
-              type: "click",
-              listener: (ev: Event) => {
-                if (!getLastTranslateTask()) {
-                  addTranslateTask(
-                    (
-                      panel.querySelector(
-                        `#${makeId(
-                          getPref("rawResultOrder")
-                            ? "resulttext"
-                            : "rawtext"
-                        )}`
-                      ) as HTMLTextAreaElement
-                    )?.value
-                  );
-                }
-                addon.hooks.onTranslate(undefined, {
-                  noCheckZoteroItemLanguage: true,
-                });
-              },
-            },
-          ],
-        },
-      ],
-    },
+    
     {
       tag: "hbox",
       id: makeId("lang"),
@@ -890,6 +781,93 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
           ],
         },
       ], 
+    },
+    {
+      tag: "hbox",
+      id: makeId("engine"),
+      attributes: {
+        flex: "1",
+        align: "center",
+      },
+      properties: {
+        maxHeight: 30,
+        minHeight: 30,
+      },
+      children: [
+        {
+          tag: "menulist",
+          id: makeId("services"),
+          attributes: {
+            flex: "1",
+          },
+          listeners: [
+            {
+              type: "command",
+              listener: (e: Event) => {
+                const newService = (e.target as XUL.MenuList).value;
+                setPref("translateSource", newService);
+                addon.hooks.onReaderTabPanelRefresh();
+                const data = getLastTranslateTask();
+                return;
+                // if (!data) {
+                //   return;
+                // }
+                // data.service = newService;
+                // addon.hooks.onTranslate(undefined, {
+                //   noCheckZoteroItemLanguage: true,
+                // });
+              },
+            },
+          ],
+          children: [
+            {
+              tag: "menupopup",
+              children: SERVICES.filter(
+                (service) => service.type === "sentence"
+              ).map((service) => ({
+                tag: "menuitem",
+                attributes: {
+                  label: getString(`service.${service.id}`),
+                  value: service.id,
+                },
+              })),
+            },
+          ],
+        },
+        {
+          tag: "button",
+          namespace: "xul",
+          attributes: {
+            label: `${getString(
+              "readerpanel.translate.button.label"
+            )}(${getString("ctrl")} + T)`,
+            flex: "1",
+          },
+          listeners: [
+            {
+              type: "click",
+              listener: (ev: Event) => {
+                if (!getLastTranslateTask()) {
+                  addTranslateTask(
+                    (
+                      panel.querySelector(
+                        `#${makeId(
+                          getPref("rawResultOrder")
+                            ? "resulttext"
+                            : "rawtext"
+                        )}`
+                      ) as HTMLTextAreaElement
+                    )?.value
+                  );
+                }
+                addon.hooks.onTranslate(undefined, {
+                  noCheckZoteroItemLanguage: true,
+                });
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       tag: "hbox",
@@ -1106,12 +1084,12 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         minHeight: 30,
       },
       children: [
-        {
-          tag: "div",
-          properties: {
-            innerHTML: getString("readerpanel.copy.description.label"),
-          },
-        },
+        // {
+        //   tag: "div",
+        //   properties: {
+        //     innerHTML: getString("readerpanel.copy.description.label"),
+        //   },
+        // },
         {
           tag: "button",
           namespace: "xul",
@@ -1160,33 +1138,33 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             },
           ],
         },
-        {
-          tag: "button",
-          namespace: "xul",
-          attributes: {
-            label: getString("readerpanel.copy.both.label"),
-            flex: "1",
-          },
-          listeners: [
-            {
-              type: "click",
-              listener: (e: Event) => {
-                const task = getLastTranslateTask({
-                  id: panel.getAttribute("translate-task-id") || "",
-                });
-                if (!task) {
-                  return;
-                }
-                new ztoolkit.Clipboard()
-                  .addText(
-                    `${task.raw}\n----\n${task.result}`,
-                    "text/unicode"
-                  )
-                  .copy();
-              },
-            },
-          ],
-        },
+        // {
+        //   tag: "button",
+        //   namespace: "xul",
+        //   attributes: {
+        //     label: getString("readerpanel.copy.both.label"),
+        //     flex: "1",
+        //   },
+        //   listeners: [
+        //     {
+        //       type: "click",
+        //       listener: (e: Event) => {
+        //         const task = getLastTranslateTask({
+        //           id: panel.getAttribute("translate-task-id") || "",
+        //         });
+        //         if (!task) {
+        //           return;
+        //         }
+        //         new ztoolkit.Clipboard()
+        //           .addText(
+        //             `${task.raw}\n----\n${task.result}`,
+        //             "text/unicode"
+        //           )
+        //           .copy();
+        //       },
+        //     },
+        //   ],
+        // },
       ],
     },
     {

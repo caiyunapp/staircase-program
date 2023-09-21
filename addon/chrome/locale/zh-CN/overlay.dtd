@@ -1,6 +1,6 @@
 <!ENTITY zotero.__addonRef__.pref.general.label "通用">
-<!ENTITY zotero.__addonRef__.pref.basic.enableAuto.label "自动翻译选择内容">
-<!ENTITY zotero.__addonRef__.pref.basic.enablePopup.label "翻译时自动开启弹窗">
+<!ENTITY zotero.__addonRef__.pref.basic.enableAuto.label "划词自动翻译">
+<!ENTITY zotero.__addonRef__.pref.basic.enablePopup.label "翻译时自动开启悬浮弹窗">
 <!ENTITY zotero.__addonRef__.pref.basic.enableHidePopupTextarea.label "隐藏翻译弹窗">
 <!ENTITY zotero.__addonRef__.pref.basic.enableComment.label "自动翻译批注">
 <!ENTITY zotero.__addonRef__.pref.basic.annotationTranslationInComment.label "存在笔记评论">
@@ -34,8 +34,8 @@
 <!ENTITY zotero.__addonRef__.help.releasetime.label "Build __buildTime__">
 
 <!ENTITY zotero.__addonRef__.pref.interface.label "通用">
-<!ENTITY zotero.__addonRef__.pref.interface.fontSize.label "字体大小">
-<!ENTITY zotero.__addonRef__.pref.interface.lineHeight.label "行高">
+<!ENTITY zotero.__addonRef__.pref.interface.fontSize.label "原文/译文字体大小">
+<!ENTITY zotero.__addonRef__.pref.interface.lineHeight.label "原文/译文行高">
 <!ENTITY zotero.__addonRef__.pref.interface.autoFocus.label "侧边栏: 自动聚焦">
 <!ENTITY zotero.__addonRef__.pref.interface.showSidebarEngine.label "侧边栏: 显示翻译引擎选择菜单">
 <!ENTITY zotero.__addonRef__.pref.interface.showSidebarLanguage.label "侧边栏: 显示语言选择菜单">
