@@ -1029,12 +1029,32 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
     // },
     {
       tag: "hbox",
+      id: makeId("raw_tip"),
+      attributes: {
+        flex: "1",
+      },
+      properties: {
+            maxHeight: 20,
+            minHeight: 20,
+      },
+      children: [
+        {
+          tag: "div",
+          properties: {
+            innerHTML: "译文:",
+          },
+        },
+      ],
+    },
+    {
+      tag: "hbox",
       id: makeId("raw"),
       attributes: {
         flex: "1",
         spellcheck: false,
       },
       children: [
+       
         {
           tag: "textarea",
           id: makeId("rawtext"),
@@ -1065,13 +1085,32 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         },
       ],
     },
+    // {
+    //   tag: "splitter",
+    //   id: makeId("splitter"),
+    //   attributes: { collapse: "after" },
+    //   children: [
+    //     {
+    //       tag: "grippy",
+    //     },
+    //   ],
+    // },
     {
-      tag: "splitter",
-      id: makeId("splitter"),
-      attributes: { collapse: "after" },
+      tag: "hbox",
+      id: makeId("raw_tip_trans"),
+      attributes: {
+        flex: "1",
+      },
+      properties: {
+            maxHeight: 20,
+            minHeight: 20,
+      },
       children: [
         {
-          tag: "grippy",
+          tag: "div",
+          properties: {
+            innerHTML: "原文/选择的文本内容:",
+          },
         },
       ],
     },
@@ -1122,8 +1161,8 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         align: "center",
       },
       properties: {
-        maxHeight: 30,
-        minHeight: 30,
+        maxHeight: 20,
+        minHeight: 20,
       },
       children: [
         {
@@ -1268,7 +1307,7 @@ function updatePanel(panel: HTMLElement) {
   // updateHidden("auto", "showSidebarSettings");
   // updateHidden("concat", "showSidebarConcat");
   updateHidden("raw", "showSidebarRaw");
-  updateHidden("splitter", "showSidebarRaw");
+  // updateHidden("splitter", "showSidebarRaw");
   updateHidden("copy", "showSidebarCopy");
 
   setValue("services", getPref("translateSource") as string);
