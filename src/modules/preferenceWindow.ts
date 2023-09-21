@@ -374,7 +374,7 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
       break;
     case "setWordSecret":
       { 
-        ztoolkit.log('add setWordSecret, is loading...')
+        // ztoolkit.log('add setWordSecret, is loading...')
 
         const __serviceId = getService('caiyun')['defaultSecret'] || '';
         const serviceId = __serviceId;
@@ -445,14 +445,14 @@ function bindUseridView(doc:Document) {
     )as any;
   
     value.value = getPref("caiyunUserAccountIdValue") as string;
-  ztoolkit.log('uid:' + value.value)
+  // ztoolkit.log('uid:' + value.value)
     // window.alert("222 hello:"+value.value);
 
-    ztoolkit.log(value.value);
+    // ztoolkit.log(value.value);
     const __val = value.value;
     if ( __val.length > 0 ) {
       const re = await SetPeridToUid(value.value);
-      ztoolkit.log(re)
+      // ztoolkit.log(re)
   
       setPref("caiyunUserAccountIdValue", value.value);
       if ( re && re['rc'] === 0 && re['user_id'] ) {
@@ -480,7 +480,7 @@ function bindUseridView(doc:Document) {
 
 async function  updateUserInfo( uid: string ) {
   const re = await UpdateUserInfo( uid );
-  console.log(re);
+  // console.log(re);
   if ( re && re['user']) {
     const user = re['user'];
     const avatar = user['avatar_url'] || '';

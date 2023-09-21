@@ -66,7 +66,7 @@ export async function registerReaderTabPanel() {
     });
   updateTextAreasSize(true);
 
-  ztoolkit.log('registerReaderTabPanel')
+  // ztoolkit.log('registerReaderTabPanel')
   // registerReaderTabPanel();
 }
 
@@ -198,7 +198,7 @@ function buildPanel(panel: HTMLElement, refID: string, force: boolean = false) {
   updateTextAreaSize(panel);
   recordPanel(panel);
 
-  ztoolkit.log('--- buildPanel ---');
+  // ztoolkit.log('--- buildPanel ---');
 
   updateLoginPanel(panel, refID);
 }
@@ -534,8 +534,8 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                 listener: (e: Event) => {
                   setPref("sourceLanguage", (e.target as XUL.MenuList).value);
                   addon.hooks.onReaderTabPanelRefresh();
-                  ztoolkit.log("listeners langfrom:");
-                  ztoolkit.log((e.target as XUL.MenuList).value);
+                  // ztoolkit.log("listeners langfrom:");
+                  // ztoolkit.log((e.target as XUL.MenuList).value);
                 },
               },
             ],
@@ -582,8 +582,8 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                 listener: (e: Event) => {
                   setPref("targetLanguage", (e.target as XUL.MenuList).value);
                   addon.hooks.onReaderTabPanelRefresh();
-                  ztoolkit.log("listeners langto:");
-                  ztoolkit.log((e.target as XUL.MenuList).value)
+                  // ztoolkit.log("listeners langto:");
+                  // ztoolkit.log((e.target as XUL.MenuList).value)
                 },
               },
             ],
@@ -708,8 +708,8 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                  
                   setPref("defCustomerDicts", (e.target as XUL.MenuList).value);
                   addon.hooks.onReaderTabPaneCustomerDicts();
-                  ztoolkit.log('listener defCustomerDicts:')
-                  ztoolkit.log((e.target as XUL.MenuList).value)
+                  // ztoolkit.log('listener defCustomerDicts:')
+                  // ztoolkit.log((e.target as XUL.MenuList).value)
                 },
               },
             ],
@@ -911,122 +911,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         },
       ],
     },
-    // {
-    //   tag: "hbox",
-    //   id: makeId("auto"),
-    //   attributes: {
-    //     flex: "1",
-    //     align: "center",
-    //   },
-    //   properties: {
-    //     maxHeight: 30,
-    //     minHeight: 30,
-    //   },
-    //   children: [
-    //     {
-    //       tag: "div",
-    //       properties: {
-    //         innerHTML: getString("readerpanel.auto.description.label"),
-    //       },
-    //     },
-    //     {
-    //       tag: "checkbox",
-    //       id: makeId("autotrans"),
-    //       attributes: {
-    //         label: getString("readerpanel.auto.selection.label"),
-    //       },
-    //       listeners: [
-    //         {
-    //           type: "command",
-    //           listener: (e: Event) => {
-    //             setPref("enableAuto", (e.target as XUL.Checkbox).checked);
-    //             addon.hooks.onReaderTabPanelRefresh();
-    //           },
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       tag: "checkbox",
-    //       id: makeId("autoannot"),
-    //       attributes: {
-    //         label: getString("readerpanel.auto.annotation.label"),
-    //       },
-    //       listeners: [
-    //         {
-    //           type: "command",
-    //           listener: (e: Event) => {
-    //             setPref(
-    //               "enableComment",
-    //               (e.target as XUL.Checkbox).checked
-    //             );
-    //             addon.hooks.onReaderTabPanelRefresh();
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   tag: "hbox",
-    //   id: makeId("concat"),
-    //   attributes: {
-    //     flex: "1",
-    //     align: "center",
-    //   },
-    //   properties: {
-    //     maxHeight: 30,
-    //     minHeight: 30,
-    //   },
-    //   children: [
-    //     {
-    //       tag: "div",
-    //       properties: {
-    //         innerHTML: getString("readerpanel.concat.description.label"),
-    //       },
-    //     },
-    //     {
-    //       tag: "checkbox",
-    //       id: makeId("concat"),
-    //       attributes: {
-    //         label: `${getString(
-    //           "readerpanel.concat.enable.label"
-    //         )}/${getString("alt")}`,
-    //       },
-    //       listeners: [
-    //         {
-    //           type: "command",
-    //           listener: (e:Event) => {
-    //             addon.data.translate.concatCheckbox = (
-    //               e.target as XUL.Checkbox
-    //             ).checked;
-    //             addon.hooks.onReaderTabPanelRefresh();
-    //           },
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       tag: "button",
-    //       namespace: "xul",
-    //       attributes: {
-    //         label: getString("readerpanel.concat.clear.label"),
-    //         flex: "0",
-    //       },
-    //       listeners: [
-    //         {
-    //           type: "click",
-    //           listener: (e:Event) => {
-    //             const task = getLastTranslateTask();
-    //             if (task) {
-    //               task.raw = "";
-    //               task.result = "";
-    //               addon.hooks.onReaderTabPanelRefresh();
-    //             }
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
+    
     {
       tag: "hbox",
       id: makeId("raw_tip"),
@@ -1085,16 +970,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         },
       ],
     },
-    // {
-    //   tag: "splitter",
-    //   id: makeId("splitter"),
-    //   attributes: { collapse: "after" },
-    //   children: [
-    //     {
-    //       tag: "grippy",
-    //     },
-    //   ],
-    // },
+    
     {
       tag: "hbox",
       id: makeId("raw_tip_trans"),
@@ -1133,7 +1009,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             {
               type: "input",
               listener: (ev:Event) => {
-                console.log(ev)
+                // console.log(ev)
                 const task = getLastTranslateTask({
                   id: panel.getAttribute("translate-task-id") || "",
                 });
@@ -1213,33 +1089,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             },
           ],
         },
-        // {
-        //   tag: "button",
-        //   namespace: "xul",
-        //   attributes: {
-        //     label: getString("readerpanel.copy.both.label"),
-        //     flex: "1",
-        //   },
-        //   listeners: [
-        //     {
-        //       type: "click",
-        //       listener: (e: Event) => {
-        //         const task = getLastTranslateTask({
-        //           id: panel.getAttribute("translate-task-id") || "",
-        //         });
-        //         if (!task) {
-        //           return;
-        //         }
-        //         new ztoolkit.Clipboard()
-        //           .addText(
-        //             `${task.raw}\n----\n${task.result}`,
-        //             "text/unicode"
-        //           )
-        //           .copy();
-        //       },
-        //     },
-        //   ],
-        // },
+       
       ],
     },
     {
@@ -1304,17 +1154,13 @@ function updatePanel(panel: HTMLElement) {
 
   updateHidden("engine", "showSidebarEngine");
   updateHidden("lang", "showSidebarLanguage");
-  // updateHidden("auto", "showSidebarSettings");
-  // updateHidden("concat", "showSidebarConcat");
   updateHidden("raw", "showSidebarRaw");
-  // updateHidden("splitter", "showSidebarRaw");
   updateHidden("copy", "showSidebarCopy");
 
   setValue("services", getPref("translateSource") as string);
   setValue("langfrom", getPref("sourceLanguage") as string);
   setValue("langto", getPref("targetLanguage") as string);
 
-  // setCheckBox("autotrans", getPref("enableAuto") as boolean);
   // setCheckBox("autoannot", getPref("enableComment") as boolean);
   // setCheckBox("concat", addon.data.translate.concatCheckbox);
 

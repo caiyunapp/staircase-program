@@ -99,15 +99,15 @@ export class TranslateTaskRunner {
     const uid = getPref('caiyunUserid') as string;
     if ( uid ) {
       data.uid = uid;
-      ztoolkit.log(uid);
-      ztoolkit.log(getPref('caiyunUserid')); 
+      // ztoolkit.log(uid);
+      // ztoolkit.log(getPref('caiyunUserid')); 
   
       // ***** add customer data *****
       data.secret = getServiceSecret(data.service);
       data.status = "processing";
       try {
-        ztoolkit.log('http: data show')
-        ztoolkit.log(data);
+        // ztoolkit.log('http: data show')
+        // ztoolkit.log(data);
         await this.processor(data as Required<TranslateTask>);
         data.status = "success";
       } catch (e) {

@@ -9,7 +9,7 @@ import { TranslateTask } from "./utils/translate";
  * @returns TranslateTask object.
  */
 async function translate(raw: string, service?: string) {
-  ztoolkit.log('---- translate ----')
+  // ztoolkit.log('---- translate ----')
   
   const data: TranslateTask = {
     id: `${Zotero.Utilities.randomString()}-${new Date().getTime()}`,
@@ -26,8 +26,8 @@ async function translate(raw: string, service?: string) {
   await addon.data.translate.services.runTranslationTask(data, {
     noDisplay: true,
   });
-  ztoolkit.log('data');
-  ztoolkit.log(data);
+  // ztoolkit.log('data');
+  // ztoolkit.log(data);
   return data;
 }
 

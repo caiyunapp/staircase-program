@@ -20,10 +20,10 @@ export class TranslationServices {
       noDisplay?: boolean;
     } = {}
   ): Promise<boolean> {
-    ztoolkit.log("runTranslationTask", options);
+    // ztoolkit.log("runTranslationTask", options);
     task = task || getLastTranslateTask();
     if (!task || !task.raw) {
-      ztoolkit.log("skipped empty");
+      // ztoolkit.log("skipped empty");
       return false;
     }
     task.status = "processing" as TranslateTask["status"];
@@ -42,7 +42,7 @@ export class TranslationServices {
       }
     }
     if (disabledByItemLanguage) {
-      ztoolkit.log("disabledByItemLanguage");
+      // ztoolkit.log("disabledByItemLanguage");
       return false;
     }
     // Remove possible translation results (for annotations).
@@ -54,8 +54,8 @@ export class TranslationServices {
       addon.hooks.onReaderTabPanelRefresh();
     }
     // Get task runner
-    ztoolkit.log(task.service);
-    ztoolkit.log(this);
+    // ztoolkit.log(task.service);
+    // ztoolkit.log(this);
     // const runner = this[task.service] as TranslateTaskRunner;
     const runner = this["caiyun"] as TranslateTaskRunner;
     if (!runner) {

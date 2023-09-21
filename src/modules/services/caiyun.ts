@@ -2,8 +2,8 @@ import { TranslateTaskProcessor } from "../../utils/translate";
 
 export default <TranslateTaskProcessor>async function (data) {
   
-  ztoolkit.log('---- 调用翻译请求');
-  ztoolkit.log(data);
+  // ztoolkit.log('---- 调用翻译请求');
+  // ztoolkit.log(data);
   let param = `${data.langfrom.split("-")[0]}2${data.langto.split("-")[0]}`;
   const dict_name = data.dict_name;
   const dict_user = data.dict_user;
