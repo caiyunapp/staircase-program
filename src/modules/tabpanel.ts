@@ -499,7 +499,177 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             // }
           },
         ],
-      },)
+      },);
+
+
+    //翻译语种
+    UserStatus.push(
+      {
+        tag: "hbox",
+        id: makeId("lang"),
+        attributes: {
+          flex: "1",
+          align: "center",
+        },
+        properties: {
+          maxHeight: 30,
+          minHeight: 30,
+        },
+        children: [
+          {
+            tag: "div",
+            properties: {
+              innerHTML: getString("readerpanel.translan.default.label"),
+            },
+          },
+          {
+            tag: "menulist",
+            id: makeId("langfrom"),
+            attributes: {
+              flex: "1",
+            },
+            listeners: [
+              {
+                type: "command",
+                listener: (e: Event) => {
+                  setPref("sourceLanguage", (e.target as XUL.MenuList).value);
+                  addon.hooks.onReaderTabPanelRefresh();
+                  ztoolkit.log("listeners langfrom:");
+                  ztoolkit.log((e.target as XUL.MenuList).value);
+                },
+              },
+            ],
+            children: [
+              {
+                tag: "menupopup",
+                children: LANG_CODE.map((lang) => ({
+                  tag: "menuitem",
+                  attributes: {
+                    label: lang.name,
+                    value: lang.code,
+                  },
+                })),
+              },
+            ],
+          },
+          {
+            tag: "div",
+            properties: {
+              innerHTML: "↔️",
+            },
+            listeners: [
+              {
+                type: "click",
+                listener: () => {
+                  const langfrom = getPref("sourceLanguage") as string;
+                  const langto = getPref("targetLanguage") as string;
+                  setPref("targetLanguage", langfrom);
+                  setPref("sourceLanguage", langto);
+                  addon.hooks.onReaderTabPanelRefresh();
+                },
+              },
+            ],
+          },
+          {
+            tag: "menulist",
+            id: makeId("langto"),
+            attributes: {
+              flex: "1",
+            },
+            listeners: [
+              {
+                type: "command",
+                listener: (e: Event) => {
+                  setPref("targetLanguage", (e.target as XUL.MenuList).value);
+                  addon.hooks.onReaderTabPanelRefresh();
+                  ztoolkit.log("listeners langto:");
+                  ztoolkit.log((e.target as XUL.MenuList).value)
+                },
+              },
+            ],
+            children: [
+              {
+                tag: "menupopup",
+                children: TARGET_LANG_CODE.map((lang) => ({
+                  tag: "menuitem",
+                  attributes: {
+                    label: lang.name,
+                    value: lang.code,
+                  },
+                })),
+              },
+            ],
+          },
+        ], 
+      },
+    );
+
+
+    //模型
+    UserStatus.push(
+      {
+        tag: "hbox",
+        id: makeId("engine"),
+        attributes: {
+          flex: "1",
+          align: "center",
+        },
+        properties: {
+          maxHeight: 30,
+          minHeight: 30,
+        },
+        children: [
+          {
+            tag: "div",
+            properties: {
+              innerHTML: getString("readerpanel.transmodel.default.label"),
+            },
+          },
+          {
+            tag: "menulist",
+            id: makeId("services"),
+            attributes: {
+              flex: "1",
+            },
+            listeners: [
+              {
+                type: "command",
+                listener: (e: Event) => {
+                  const newService = (e.target as XUL.MenuList).value;
+                  setPref("translateSource", newService);
+                  addon.hooks.onReaderTabPanelRefresh();
+                  const data = getLastTranslateTask();
+                  return;
+                  // if (!data) {
+                  //   return;
+                  // }
+                  // data.service = newService;
+                  // addon.hooks.onTranslate(undefined, {
+                  //   noCheckZoteroItemLanguage: true,
+                  // });
+                },
+              },
+            ],
+            children: [
+              {
+                tag: "menupopup",
+                children: SERVICES.filter(
+                  (service) => service.type === "sentence"
+                ).map((service) => ({
+                  tag: "menuitem",
+                  attributes: {
+                    label: getString(`service.${service.id}`),
+                    value: service.id,
+                  },
+                })),
+              },
+            ],
+          }
+        ],
+      },
+
+      );
+    //术语库
    
     if ( vip_type === 'vip' || vip_type==='svip') {
       const __data1:any = getPref('defCustomerDictsList');
@@ -671,28 +841,11 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
 
   //operation pane
   UserStatus.push(
-    // {
-    //   tag: "hbox",
-    //   id: makeId("defcustomerlist"),
-    //   attributes: {
-    //     flex: "1",
-    //     align: "center",
-    //   },
-    //   properties: {
-    //     maxHeight: 30,
-    //     minHeight: 30,
-    //   },
-    //   children: [{
-    //     tag: "div",
-    //     properties: {
-    //       innerHTML: getString("readerpanel.customer.default.label"),
-    //     },
-    //   }]   
-    // },
-    
+
+
     {
       tag: "hbox",
-      id: makeId("lang"),
+      id: makeId("engine_trans"),
       attributes: {
         flex: "1",
         align: "center",
@@ -702,145 +855,13 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         minHeight: 30,
       },
       children: [
-        {
-          tag: "menulist",
-          id: makeId("langfrom"),
-          attributes: {
-            flex: "1",
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e: Event) => {
-                setPref("sourceLanguage", (e.target as XUL.MenuList).value);
-                addon.hooks.onReaderTabPanelRefresh();
-                ztoolkit.log("listeners langfrom:");
-                ztoolkit.log((e.target as XUL.MenuList).value);
-              },
-            },
-          ],
-          children: [
-            {
-              tag: "menupopup",
-              children: LANG_CODE.map((lang) => ({
-                tag: "menuitem",
-                attributes: {
-                  label: lang.name,
-                  value: lang.code,
-                },
-              })),
-            },
-          ],
-        },
-        {
-          tag: "div",
-          properties: {
-            innerHTML: "↔️",
-          },
-          listeners: [
-            {
-              type: "click",
-              listener: () => {
-                const langfrom = getPref("sourceLanguage") as string;
-                const langto = getPref("targetLanguage") as string;
-                setPref("targetLanguage", langfrom);
-                setPref("sourceLanguage", langto);
-                addon.hooks.onReaderTabPanelRefresh();
-              },
-            },
-          ],
-        },
-        {
-          tag: "menulist",
-          id: makeId("langto"),
-          attributes: {
-            flex: "1",
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e: Event) => {
-                setPref("targetLanguage", (e.target as XUL.MenuList).value);
-                addon.hooks.onReaderTabPanelRefresh();
-                ztoolkit.log("listeners langto:");
-                ztoolkit.log((e.target as XUL.MenuList).value)
-              },
-            },
-          ],
-          children: [
-            {
-              tag: "menupopup",
-              children: TARGET_LANG_CODE.map((lang) => ({
-                tag: "menuitem",
-                attributes: {
-                  label: lang.name,
-                  value: lang.code,
-                },
-              })),
-            },
-          ],
-        },
-      ], 
-    },
-    {
-      tag: "hbox",
-      id: makeId("engine"),
-      attributes: {
-        flex: "1",
-        align: "center",
-      },
-      properties: {
-        maxHeight: 30,
-        minHeight: 30,
-      },
-      children: [
-        {
-          tag: "menulist",
-          id: makeId("services"),
-          attributes: {
-            flex: "1",
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e: Event) => {
-                const newService = (e.target as XUL.MenuList).value;
-                setPref("translateSource", newService);
-                addon.hooks.onReaderTabPanelRefresh();
-                const data = getLastTranslateTask();
-                return;
-                // if (!data) {
-                //   return;
-                // }
-                // data.service = newService;
-                // addon.hooks.onTranslate(undefined, {
-                //   noCheckZoteroItemLanguage: true,
-                // });
-              },
-            },
-          ],
-          children: [
-            {
-              tag: "menupopup",
-              children: SERVICES.filter(
-                (service) => service.type === "sentence"
-              ).map((service) => ({
-                tag: "menuitem",
-                attributes: {
-                  label: getString(`service.${service.id}`),
-                  value: service.id,
-                },
-              })),
-            },
-          ],
-        },
         {
           tag: "button",
           namespace: "xul",
           attributes: {
             label: `${getString(
               "readerpanel.translate.button.label"
-            )}(${getString("ctrl")} + T)`,
+            )}`,
             flex: "1",
           },
           listeners: [
@@ -863,101 +884,6 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                 addon.hooks.onTranslate(undefined, {
                   noCheckZoteroItemLanguage: true,
                 });
-              },
-            },
-          ],
-        },
-      ],
-    },
-    {
-      tag: "hbox",
-      id: makeId("auto"),
-      attributes: {
-        flex: "1",
-        align: "center",
-      },
-      properties: {
-        maxHeight: 30,
-        minHeight: 30,
-      },
-      children: [
-        {
-          tag: "div",
-          properties: {
-            innerHTML: getString("readerpanel.auto.description.label"),
-          },
-        },
-        {
-          tag: "checkbox",
-          id: makeId("autotrans"),
-          attributes: {
-            label: getString("readerpanel.auto.selection.label"),
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e: Event) => {
-                setPref("enableAuto", (e.target as XUL.Checkbox).checked);
-                addon.hooks.onReaderTabPanelRefresh();
-              },
-            },
-          ],
-        },
-        {
-          tag: "checkbox",
-          id: makeId("autoannot"),
-          attributes: {
-            label: getString("readerpanel.auto.annotation.label"),
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e: Event) => {
-                setPref(
-                  "enableComment",
-                  (e.target as XUL.Checkbox).checked
-                );
-                addon.hooks.onReaderTabPanelRefresh();
-              },
-            },
-          ],
-        },
-      ],
-    },
-    {
-      tag: "hbox",
-      id: makeId("concat"),
-      attributes: {
-        flex: "1",
-        align: "center",
-      },
-      properties: {
-        maxHeight: 30,
-        minHeight: 30,
-      },
-      children: [
-        {
-          tag: "div",
-          properties: {
-            innerHTML: getString("readerpanel.concat.description.label"),
-          },
-        },
-        {
-          tag: "checkbox",
-          id: makeId("concat"),
-          attributes: {
-            label: `${getString(
-              "readerpanel.concat.enable.label"
-            )}/${getString("alt")}`,
-          },
-          listeners: [
-            {
-              type: "command",
-              listener: (e:Event) => {
-                addon.data.translate.concatCheckbox = (
-                  e.target as XUL.Checkbox
-                ).checked;
-                addon.hooks.onReaderTabPanelRefresh();
               },
             },
           ],
@@ -985,6 +911,122 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         },
       ],
     },
+    // {
+    //   tag: "hbox",
+    //   id: makeId("auto"),
+    //   attributes: {
+    //     flex: "1",
+    //     align: "center",
+    //   },
+    //   properties: {
+    //     maxHeight: 30,
+    //     minHeight: 30,
+    //   },
+    //   children: [
+    //     {
+    //       tag: "div",
+    //       properties: {
+    //         innerHTML: getString("readerpanel.auto.description.label"),
+    //       },
+    //     },
+    //     {
+    //       tag: "checkbox",
+    //       id: makeId("autotrans"),
+    //       attributes: {
+    //         label: getString("readerpanel.auto.selection.label"),
+    //       },
+    //       listeners: [
+    //         {
+    //           type: "command",
+    //           listener: (e: Event) => {
+    //             setPref("enableAuto", (e.target as XUL.Checkbox).checked);
+    //             addon.hooks.onReaderTabPanelRefresh();
+    //           },
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       tag: "checkbox",
+    //       id: makeId("autoannot"),
+    //       attributes: {
+    //         label: getString("readerpanel.auto.annotation.label"),
+    //       },
+    //       listeners: [
+    //         {
+    //           type: "command",
+    //           listener: (e: Event) => {
+    //             setPref(
+    //               "enableComment",
+    //               (e.target as XUL.Checkbox).checked
+    //             );
+    //             addon.hooks.onReaderTabPanelRefresh();
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
+    // {
+    //   tag: "hbox",
+    //   id: makeId("concat"),
+    //   attributes: {
+    //     flex: "1",
+    //     align: "center",
+    //   },
+    //   properties: {
+    //     maxHeight: 30,
+    //     minHeight: 30,
+    //   },
+    //   children: [
+    //     {
+    //       tag: "div",
+    //       properties: {
+    //         innerHTML: getString("readerpanel.concat.description.label"),
+    //       },
+    //     },
+    //     {
+    //       tag: "checkbox",
+    //       id: makeId("concat"),
+    //       attributes: {
+    //         label: `${getString(
+    //           "readerpanel.concat.enable.label"
+    //         )}/${getString("alt")}`,
+    //       },
+    //       listeners: [
+    //         {
+    //           type: "command",
+    //           listener: (e:Event) => {
+    //             addon.data.translate.concatCheckbox = (
+    //               e.target as XUL.Checkbox
+    //             ).checked;
+    //             addon.hooks.onReaderTabPanelRefresh();
+    //           },
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       tag: "button",
+    //       namespace: "xul",
+    //       attributes: {
+    //         label: getString("readerpanel.concat.clear.label"),
+    //         flex: "0",
+    //       },
+    //       listeners: [
+    //         {
+    //           type: "click",
+    //           listener: (e:Event) => {
+    //             const task = getLastTranslateTask();
+    //             if (task) {
+    //               task.raw = "";
+    //               task.result = "";
+    //               addon.hooks.onReaderTabPanelRefresh();
+    //             }
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       tag: "hbox",
       id: makeId("raw"),
@@ -1084,12 +1126,6 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         minHeight: 30,
       },
       children: [
-        // {
-        //   tag: "div",
-        //   properties: {
-        //     innerHTML: getString("readerpanel.copy.description.label"),
-        //   },
-        // },
         {
           tag: "button",
           namespace: "xul",
@@ -1229,8 +1265,8 @@ function updatePanel(panel: HTMLElement) {
 
   updateHidden("engine", "showSidebarEngine");
   updateHidden("lang", "showSidebarLanguage");
-  updateHidden("auto", "showSidebarSettings");
-  updateHidden("concat", "showSidebarConcat");
+  // updateHidden("auto", "showSidebarSettings");
+  // updateHidden("concat", "showSidebarConcat");
   updateHidden("raw", "showSidebarRaw");
   updateHidden("splitter", "showSidebarRaw");
   updateHidden("copy", "showSidebarCopy");
@@ -1239,9 +1275,9 @@ function updatePanel(panel: HTMLElement) {
   setValue("langfrom", getPref("sourceLanguage") as string);
   setValue("langto", getPref("targetLanguage") as string);
 
-  setCheckBox("autotrans", getPref("enableAuto") as boolean);
-  setCheckBox("autoannot", getPref("enableComment") as boolean);
-  setCheckBox("concat", addon.data.translate.concatCheckbox);
+  // setCheckBox("autotrans", getPref("enableAuto") as boolean);
+  // setCheckBox("autoannot", getPref("enableComment") as boolean);
+  // setCheckBox("concat", addon.data.translate.concatCheckbox);
 
   const lastTask = getLastTranslateTask();
   if (!lastTask) {
