@@ -1042,8 +1042,8 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         align: "center",
       },
       properties: {
-        maxHeight: 20,
-        minHeight: 20,
+        maxHeight: 30,
+        minHeight: 30,
       },
       children: [
         {
