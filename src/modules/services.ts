@@ -1,3 +1,4 @@
+import ZoteroToolkit from "zotero-plugin-toolkit";
 import { getPref } from "../utils/prefs";
 import {
   getLastTranslateTask,
@@ -122,7 +123,7 @@ export class TranslationServices {
             if (item) {
               ztoolkit.ExtraField.setExtraField(
                 item,
-                "titleTranslation",
+                "标题翻译",
                 task.result
               );
               item.saveTx();
@@ -131,10 +132,11 @@ export class TranslationServices {
           break;
         case "abstract":
           {
+            
             if (item) {
               ztoolkit.ExtraField.setExtraField(
                 item,
-                "abstractTranslation",
+                "摘要翻译",
                 task.result
               );
               item.saveTx();

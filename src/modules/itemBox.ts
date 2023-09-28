@@ -2,10 +2,10 @@ import { getString } from "../utils/locale";
 import { getPref } from "../utils/prefs";
 
 export async function registerItemBoxExtraRows() {
-  if (getPref("showItemBoxTitleTranslation") !== false) {
+
     await ztoolkit.ItemBox.register(
       "titleTranslation",
-      getString("field.titleTranslation"),
+      "标题翻译",
       // getField hook is registered in itemTree.ts
       undefined,
       {
@@ -16,27 +16,27 @@ export async function registerItemBoxExtraRows() {
         },
         index: 2,
         multiline: true,
+        collapsible: true,
       }
     );
-  }
+  
 
-  if (getPref("showItemBoxAbstractTranslation") !== false) {
     await ztoolkit.ItemBox.register(
       "abstractTranslation",
-      getString("field.abstractTranslation"),
-      (field, unformatted, includeBaseMapped, item, original) => {
-        return ztoolkit.ExtraField.getExtraField(item, field) || "";
-      },
+      "摘要翻译",
+      // (field, unformatted, includeBaseMapped, item, original) => {
+      //   return ztoolkit.ExtraField.getExtraField(item, field) || "";
+      // },
+      undefined,
       {
         editable: true,
         setFieldHook: (field, value, loadIn, item, original) => {
           ztoolkit.ExtraField.setExtraField(item, field, value);
           return true;
         },
-        index: 3,
+        index: 7,
         multiline: true,
         collapsible: true,
       }
     );
   }
-}

@@ -704,7 +704,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             {
               type: "command",
               listener: (e: Event) => {
-                setPref("sourceLanguage", (e.target as XUL.MenuList).value);
+                setPref("sourceLanguage","en");
                 addon.hooks.onReaderTabPanelRefresh();
                 // ztoolkit.log("listeners langfrom:");
                 // ztoolkit.log((e.target as XUL.MenuList).value);
@@ -727,17 +727,17 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         {
           tag: "div",
           properties: {
-            innerHTML: "↔️",
+            innerHTML: "→",
           },
           listeners: [
             {
               type: "click",
               listener: () => {
-                const langfrom = getPref("sourceLanguage") as string;
-                const langto = getPref("targetLanguage") as string;
-                setPref("targetLanguage", langfrom);
-                setPref("sourceLanguage", langto);
-                addon.hooks.onReaderTabPanelRefresh();
+                // const langfrom = getPref("sourceLanguage") as string;
+                // const langto = getPref("targetLanguage") as string;
+                // setPref("targetLanguage", langfrom);
+                // setPref("sourceLanguage", langto);
+                // addon.hooks.onReaderTabPanelRefresh();
               },
             },
           ],
@@ -752,7 +752,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
             {
               type: "command",
               listener: (e: Event) => {
-                setPref("targetLanguage", (e.target as XUL.MenuList).value);
+                setPref("targetLanguage", "zh");
                 addon.hooks.onReaderTabPanelRefresh();
                 // ztoolkit.log("listeners langto:");
                 // ztoolkit.log((e.target as XUL.MenuList).value)
@@ -812,13 +812,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                 addon.hooks.onReaderTabPanelRefresh();
                 const data = getLastTranslateTask();
                 return;
-                // if (!data) {
-                //   return;
-                // }
-                // data.service = newService;
-                // addon.hooks.onTranslate(undefined, {
-                //   noCheckZoteroItemLanguage: true,
-                // });
+                
               },
             },
           ],
@@ -962,12 +956,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                 if (!task) {
                   return;
                 }
-                const reverseRawResult = getPref("rawResultOrder");
-                if (!reverseRawResult) {
-                  task.raw = (ev.target as HTMLTextAreaElement).value;
-                } else {
-                  task.result = (ev.target as HTMLTextAreaElement).value;
-                }
+                task.raw = (ev.target as HTMLTextAreaElement).value;
                 putTranslateTaskAtHead(task.id);
               },
             },
@@ -990,7 +979,7 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
         {
           tag: "div",
           properties: {
-            innerHTML: "原文/选择的文本内容:",
+            innerHTML: "选择的文本（原文）:",
           },
         },
       ],
@@ -1021,12 +1010,8 @@ function updateLoginPanel(panel: HTMLElement, refID: string, force: boolean = fa
                 if (!task) {
                   return;
                 }
-                const reverseRawResult = getPref("rawResultOrder");
-                if (!reverseRawResult) {
-                  task.result = (ev.target as HTMLTextAreaElement).value;
-                } else {
-                  task.raw = (ev.target as HTMLTextAreaElement).value;
-                }
+                task.result = (ev.target as HTMLTextAreaElement).value;
+
                 putTranslateTaskAtHead(task.id);
               },
             },
@@ -1176,8 +1161,8 @@ function updatePanel(panel: HTMLElement) {
   // For manually update translation task
   panel.setAttribute("translate-task-id", lastTask.id);
   const reverseRawResult = getPref("rawResultOrder");
-  setValue("rawtext", reverseRawResult ? lastTask.result : lastTask.raw);
-  setValue("resulttext", reverseRawResult ? lastTask.raw : lastTask.result);
+  setValue("rawtext", lastTask.result);
+  setValue("resulttext", lastTask.raw);
   setTextBoxStyle("rawtext");
   setTextBoxStyle("resulttext");
   panel

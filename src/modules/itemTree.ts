@@ -4,7 +4,7 @@ import { getPref } from "../utils/prefs";
 export async function registerExtraColumns() {
   await ztoolkit.ItemTree.register(
     "titleTranslation",
-    getString("field.titleTranslation"),
+    "标题翻译",
     (
       field: string,
       unformatted: boolean,

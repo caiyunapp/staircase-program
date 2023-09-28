@@ -85,8 +85,11 @@ export class TranslateTaskRunner {
   }
 
   public async run(data: TranslateTask) {
-    data.langfrom = getPref("sourceLanguage") as string;
-    data.langto = getPref("targetLanguage") as string;
+    // data.langfrom = getPref("sourceLanguage") as string;
+    // data.langto = getPref("targetLanguage") as string;
+
+    data.langfrom = "en";
+    data.langto = "zh";
 
     const dict_name = getPref('defCustomerDicts') as string;
     if ( dict_name ) {
