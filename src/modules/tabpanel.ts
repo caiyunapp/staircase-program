@@ -213,83 +213,83 @@ function buildExtraPanel(panel: XUL.Box) {
         align: "center",
       },
       properties: {
-        maxHeight: 30,
-        minHeight: 30,
+        maxHeight: 0,
+        minHeight: 0,
       },
       ignoreIfExists: true,
       children: [
-        {
-          tag: "button",
-          namespace: "xul",
-          attributes: {
-            label: getString("readerpanel.extra.addservice.label"),
-            flex: "0",
-          },
-          listeners: [
-            {
-              type: "click",
-              listener: (ev: Event) => {
-                const extraServices = getPref("extraEngines");
-                setPref(
-                  "extraEngines",
-                  extraServices
-                    ? `${extraServices},${SERVICES[0].id}`
-                    : SERVICES[0].id
-                );
-                openWindowPanel();
-              },
-            },
-          ],
-        },
-        {
-          tag: "button",
-          namespace: "xul",
-          attributes: {
-            label: getString("readerpanel.extra.resize.label"),
-            flex: "0",
-          },
-          listeners: [
-            {
-              type: "click",
-              listener: (ev: Event) => {
-                const win = addon.data.panel.windowPanel;
-                if (!win) {
-                  return;
-                }
-                Array.from(win.document.querySelectorAll("textarea")).forEach(
-                  (elem) => (elem.style.width = "280px")
-                );
-                ztoolkit.getGlobal("setTimeout")(() => {
-                  win?.resizeTo(300, win.outerHeight);
-                }, 10);
-              },
-            },
-          ],
-        },
-        {
-          tag: "button",
-          namespace: "xul",
-          attributes: {
-            label: getString(
-              `readerpanel.extra.${
-                getPref("keepWindowTop") ? "pinned" : "pin"
-              }.label`
-            ),
-            flex: "0",
-          },
-          styles: {
-            minWidth: "0px",
-          },
-          listeners: [
-            {
-              type: "click",
-              listener: (ev: Event) => {
-                setPref("keepWindowTop", !getPref("keepWindowTop"));
-                openWindowPanel();
-              },
-            },
-          ],
-        },
+        // {
+        //   tag: "button",
+        //   namespace: "xul",
+        //   attributes: {
+        //     label: getString("readerpanel.extra.addservice.label"),
+        //     flex: "0",
+        //   },
+        //   listeners: [
+        //     {
+        //       type: "click",
+        //       listener: (ev: Event) => {
+        //         const extraServices = getPref("extraEngines");
+        //         setPref(
+        //           "extraEngines",
+        //           extraServices
+        //             ? `${extraServices},${SERVICES[0].id}`
+        //             : SERVICES[0].id
+        //         );
+        //         openWindowPanel();
+        //       },
+        //     },
+        //   ],
+        // },
+        // {
+        //   tag: "button",
+        //   namespace: "xul",
+        //   attributes: {
+        //     label: getString("readerpanel.extra.resize.label"),
+        //     flex: "0",
+        //   },
+        //   listeners: [
+        //     {
+        //       type: "click",
+        //       listener: (ev: Event) => {
+        //         const win = addon.data.panel.windowPanel;
+        //         if (!win) {
+        //           return;
+        //         }
+        //         Array.from(win.document.querySelectorAll("textarea")).forEach(
+        //           (elem) => (elem.style.width = "280px")
+        //         );
+        //         ztoolkit.getGlobal("setTimeout")(() => {
+        //           win?.resizeTo(300, win.outerHeight);
+        //         }, 10);
+        //       },
+        //     },
+        //   ],
+        // },
+        // {
+        //   tag: "button",
+        //   namespace: "xul",
+        //   attributes: {
+        //     label: getString(
+        //       `readerpanel.extra.${
+        //         getPref("keepWindowTop") ? "pinned" : "pin"
+        //       }.label`
+        //     ),
+        //     flex: "0",
+        //   },
+        //   styles: {
+        //     minWidth: "0px",
+        //   },
+        //   listeners: [
+        //     {
+        //       type: "click",
+        //       listener: (ev: Event) => {
+        //         setPref("keepWindowTop", !getPref("keepWindowTop"));
+        //         openWindowPanel();
+        //       },
+        //     },
+        //   ],
+        // },
       ],
     },
     panel
@@ -322,106 +322,106 @@ function buildExtraPanel(panel: XUL.Box) {
                   align: "center",
                 },
                 properties: {
-                  maxHeight: 30,
-                  minHeight: 30,
+                  maxHeight: 0,
+                  minHeight: 0,
                 },
                 classList: [serviceId],
                 children: [
-                  {
-                    tag: "menulist",
-                    attributes: {
-                      flex: "1",
-                      value: serviceId,
-                    },
-                    listeners: [
-                      {
-                        type: "command",
-                        listener: (ev: Event) => {
-                          const menulist = ev.currentTarget as XUL.MenuList;
-                          const newService = menulist.value;
-                          const [serviceId, idx] =
-                            menulist.parentElement?.id.split("-") || [];
-                          const extraServices = (
-                            getPref("extraEngines") as string
-                          ).split(",");
-                          if (extraServices[Number(idx)] === serviceId) {
-                            // If the idx and service matches
-                            extraServices[Number(idx)] = newService;
-                            menulist.parentElement!.id = `${newService}-${idx}`;
-                            menulist.parentElement!.className = newService;
-                            setPref("extraEngines", extraServices.join(","));
-                          } else {
-                            // Otherwise reload window
-                            openWindowPanel();
-                          }
-                        },
-                      },
-                    ],
-                    children: [
-                      {
-                        tag: "menupopup",
-                        children: SERVICES.filter(
-                          (service) => service.type === "sentence"
-                        ).map((service) => ({
-                          tag: "menuitem",
-                          attributes: {
-                            label: getString(`service.${service.id}`),
-                            value: service.id,
-                          },
-                        })),
-                      },
-                    ],
-                  },
-                  {
-                    tag: "button",
-                    namespace: "xul",
-                    attributes: {
-                      label: getString("readerpanel.extra.removeservice.label"),
-                    },
-                    styles: {
-                      minWidth: "0px",
-                    },
-                    listeners: [
-                      {
-                        type: "click",
-                        listener: (ev) => {
-                          const [serviceId, idx] =
-                            (ev.target as XUL.Button).parentElement?.id.split(
-                              "-"
-                            ) || [];
-                          const extraServices = (
-                            getPref("extraEngines") as string
-                          ).split(",");
-                          // If the idx and service matches
-                          if (extraServices[Number(idx)] === serviceId) {
-                            extraServices.splice(Number(idx), 1);
-                            setPref("extraEngines", extraServices.join(","));
-                          }
-                          openWindowPanel();
-                        },
-                      },
-                    ],
-                  },
+                  // {
+                  //   tag: "menulist",
+                  //   attributes: {
+                  //     flex: "1",
+                  //     value: serviceId,
+                  //   },
+                  //   listeners: [
+                  //     {
+                  //       type: "command",
+                  //       listener: (ev: Event) => {
+                  //         const menulist = ev.currentTarget as XUL.MenuList;
+                  //         const newService = menulist.value;
+                  //         const [serviceId, idx] =
+                  //           menulist.parentElement?.id.split("-") || [];
+                  //         const extraServices = (
+                  //           getPref("extraEngines") as string
+                  //         ).split(",");
+                  //         if (extraServices[Number(idx)] === serviceId) {
+                  //           // If the idx and service matches
+                  //           extraServices[Number(idx)] = newService;
+                  //           menulist.parentElement!.id = `${newService}-${idx}`;
+                  //           menulist.parentElement!.className = newService;
+                  //           setPref("extraEngines", extraServices.join(","));
+                  //         } else {
+                  //           // Otherwise reload window
+                  //           openWindowPanel();
+                  //         }
+                  //       },
+                  //     },
+                  //   ],
+                  //   children: [
+                  //     {
+                  //       tag: "menupopup",
+                  //       children: SERVICES.filter(
+                  //         (service) => service.type === "sentence"
+                  //       ).map((service) => ({
+                  //         tag: "menuitem",
+                  //         attributes: {
+                  //           label: getString(`service.${service.id}`),
+                  //           value: service.id,
+                  //         },
+                  //       })),
+                  //     },
+                  //   ],
+                  // },
+                  // {
+                  //   tag: "button",
+                  //   namespace: "xul",
+                  //   attributes: {
+                  //     label: getString("readerpanel.extra.removeservice.label"),
+                  //   },
+                  //   styles: {
+                  //     minWidth: "0px",
+                  //   },
+                  //   listeners: [
+                  //     {
+                  //       type: "click",
+                  //       listener: (ev) => {
+                  //         const [serviceId, idx] =
+                  //           (ev.target as XUL.Button).parentElement?.id.split(
+                  //             "-"
+                  //           ) || [];
+                  //         const extraServices = (
+                  //           getPref("extraEngines") as string
+                  //         ).split(",");
+                  //         // If the idx and service matches
+                  //         if (extraServices[Number(idx)] === serviceId) {
+                  //           extraServices.splice(Number(idx), 1);
+                  //           setPref("extraEngines", extraServices.join(","));
+                  //         }
+                  //         openWindowPanel();
+                  //       },
+                  //     },
+                  //   ],
+                  // },
                 ],
               },
-              {
-                tag: "hbox",
-                attributes: {
-                  flex: "1",
-                  spellcheck: false,
-                },
-                children: [
-                  {
-                    tag: "textarea",
-                    styles: {
-                      resize: "none",
-                      fontSize: `${getPref("fontSize")}px`,
-                      "fontFamily": "inherit",
-                      lineHeight: getPref("lineHeight") as string,
-                    },
-                  },
-                ],
-              },
+              // {
+              //   tag: "hbox",
+              //   attributes: {
+              //     flex: "1",
+              //     spellcheck: false,
+              //   },
+              //   children: [
+              //     {
+              //       tag: "textarea",
+              //       styles: {
+              //         resize: "none",
+              //         fontSize: `${getPref("fontSize")}px`,
+              //         "fontFamily": "inherit",
+              //         lineHeight: getPref("lineHeight") as string,
+              //       },
+              //     },
+              //   ],
+              // },
             ],
           };
         }),

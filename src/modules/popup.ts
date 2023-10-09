@@ -33,9 +33,9 @@ export function updateReaderPopup() {
   const textarea = popup?.querySelector(
     `#${makeId("text")}`
   ) as HTMLTextAreaElement;
-  const addToNoteButton = popup?.querySelector(
-    `#${makeId("addtonote")}`
-  ) as HTMLDivElement;
+  // const addToNoteButton = popup?.querySelector(
+  //   `#${makeId("addtonote")}`
+  // ) as HTMLDivElement;
  if (task.audio.length > 0 && getPref("showPlayBtn")) {
     audiobox.innerHTML = "";
     ztoolkit.UI.appendElement(
@@ -68,7 +68,8 @@ export function updateReaderPopup() {
   textarea.style.lineHeight = `${
     Number(getPref("lineHeight")) * Number(getPref("fontSize"))
   }px`;
-  addToNoteButton.hidden = !Boolean(ZoteroContextPane.getActiveEditor());
+  // addToNoteButton.hidden = !Boolean(ZoteroContextPane.getActiveEditor());
+  // addToNoteButton.hidden = true;
   updatePopupSize(popup, textarea);
 }
 
@@ -208,7 +209,7 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
                     tag: "style",
                     id: makeId("style"),
                     properties: {
-                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #3db391}`,
+                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #72e1c047}`,
                     },
                     skipIfExists: true,
                   },
@@ -232,7 +233,7 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
                     tag: "style",
                     id: makeId("style"),
                     properties: {
-                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #3db391}`,
+                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #72e1c047}`,
                     },
                     skipIfExists: true,
                   },
@@ -261,16 +262,13 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
             },
           ],
         },
-        {
-          tag: "div",
-          id: makeId("addtonote"),
-          classList: ["wide-button", `${config.addonRef}-readerpopup`],
-          properties: {
-            innerHTML: `译文`,
-          },
-          ignoreIfExists: true,
-          listeners: []
-        },
+        // {
+        //   tag: "div",
+        //   id: makeId("addtonote"),
+        //   classList: ["wide-button", `${config.addonRef}-readerpopup`],
+        //   ignoreIfExists: true,
+        //   listeners: []
+        // },
       ],
     },
     popup
