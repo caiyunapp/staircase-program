@@ -276,7 +276,7 @@ function onPrefsEvents(type: string, fromElement: boolean = true) {
               .checked
           : (getPref("enableNote") as boolean);
         const hidden = !elemValue;
-        setDisabled("enable-popup-addtonote", hidden);
+        setDisabled("enable-popup-addtonote", true);
       }
       break;
     case "setUseWordService":

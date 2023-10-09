@@ -3,7 +3,7 @@ pref("__prefsPrefix__.enableDict", true);
 pref("__prefsPrefix__.enablePopup", true);
 pref("__prefsPrefix__.enableComment", true);
 pref("__prefsPrefix__.annotationTranslationPosition", "comment");
-pref("__prefsPrefix__.enableNote", true);
+pref("__prefsPrefix__.enableNote", false);
 pref("__prefsPrefix__.enableNoteReplaceMode", false);
 pref("__prefsPrefix__.translateSource", "caiyun_common");
 pref("__prefsPrefix__.dictSource", "");
