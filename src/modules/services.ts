@@ -93,6 +93,9 @@ export class TranslationServices {
     }
     const success = task.status === "success";
     const item = Zotero.Items.get(task.itemId!);
+    ztoolkit.log("---------task.itemid---------")
+
+    ztoolkit.log(task.itemId)
     // Data storage for corresponding types
     if (success) {
       switch (task.type) {
@@ -132,14 +135,20 @@ export class TranslationServices {
           break;
         case "abstract":
           {
-            
-            if (item) {
+            ztoolkit.log("---------task.itemid-abstract--------")
+
+            ztoolkit.log(task.itemId)
+            const item2 = Zotero.Items.get(7!);
+            ztoolkit.log("---------task.itemid2-abstract--------")
+            ztoolkit.log(item2.name)
+
+            if (item2) {
               ztoolkit.ExtraField.setExtraField(
-                item,
+                item2,
                 "摘要翻译",
                 task.result
               );
-              item.saveTx();
+              item2.saveTx();
             }
           }
           break;

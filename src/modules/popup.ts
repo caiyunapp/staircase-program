@@ -36,7 +36,7 @@ export function updateReaderPopup() {
   const addToNoteButton = popup?.querySelector(
     `#${makeId("addtonote")}`
   ) as HTMLDivElement;
-  if (task.audio.length > 0 && getPref("showPlayBtn")) {
+ if (task.audio.length > 0 && getPref("showPlayBtn")) {
     audiobox.innerHTML = "";
     ztoolkit.UI.appendElement(
       {
@@ -51,7 +51,7 @@ export function updateReaderPopup() {
           },
           properties: {
             innerHTML: `🔊 ${audioData.text}`,
-            onclick: () => {
+            onclick:  () => {
               new (ztoolkit.getGlobal("Audio"))(audioData.url).play();
             },
           },
@@ -117,7 +117,7 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
           id: makeId("translate"),
           classList: ["wide-button", `${config.addonRef}-readerpopup`],
           properties: {
-            innerHTML: `${SVGIcon}${getString("readerpopup.translate.label")}`,
+            innerHTML: `译文`,
             hidden: getPref("enableAuto"),
           },
           listeners: [
@@ -158,7 +158,7 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
             height: `${Math.max(
               keepSize ? Number(getPref("popupHeight")) : 30
             )}px`,
-            marginLeft: "2px"
+            marginLeft: "1px"
           },
           properties: {
             onpointerup: (e: Event) => e.stopPropagation(),
@@ -208,7 +208,7 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
                     tag: "style",
                     id: makeId("style"),
                     properties: {
-                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #7fbbea;}`,
+                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #3db391}`,
                     },
                     skipIfExists: true,
                   },
@@ -232,7 +232,7 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
                     tag: "style",
                     id: makeId("style"),
                     properties: {
-                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #bfbfbf;}`,
+                      innerHTML: `.${config.addonRef}-popup-textarea::-moz-selection {background: #3db391}`,
                     },
                     skipIfExists: true,
                   },
@@ -266,64 +266,10 @@ export function buildReaderPopup(readerInstance: _ZoteroTypes.ReaderInstance) {
           id: makeId("addtonote"),
           classList: ["wide-button", `${config.addonRef}-readerpopup`],
           properties: {
-            innerHTML: `${SVGIcon}${Zotero.getString("pdfReader.addToNote")}`,
+            innerHTML: `译文`,
           },
           ignoreIfExists: true,
-          listeners: [
-            {
-              type: "mouseup",
-              listener: async (ev) => {
-                const noteEditor =
-                  ZoteroContextPane && ZoteroContextPane.getActiveEditor();
-                if (!noteEditor) {
-                  return;
-                }
-                const editorInstance = noteEditor.getCurrentInstance();
-                if (!editorInstance) {
-                  return;
-                }
-                const selection =
-                  ztoolkit.Reader.getSelectedText(readerInstance);
-                const task = addTranslateTask(
-                  selection,
-                  readerInstance.itemID,
-                  "text"
-                );
-                if (!task) {
-                  return;
-                }
-                await addon.hooks.onTranslate(task, {
-                  noCheckZoteroItemLanguage: true,
-                  noDisplay: true,
-                });
-                if (task.status !== "success") {
-                  return;
-                }
-                const replaceMode = getPref("enableNoteReplaceMode") as boolean;
-                const { html } =
-                  Zotero.EditorInstanceUtilities.serializeAnnotations([
-                    {
-                      type: "highlight",
-                      text: replaceMode ? task.result : task.raw,
-                      comment: replaceMode ? "" : task.result,
-                      attachmentItemID: task.itemId,
-                      pageLabel:
-                        // @ts-ignore
-                        readerInstance._iframeWindow.wrappedJSObject.extractor
-                          .pageLabelsCache[readerInstance.state.pageIndex],
-                      position: {
-                        rects: [],
-                      },
-                    },
-                  ]);
-                editorInstance._postMessage({
-                  action: "insertHTML",
-                  pos: null,
-                  html,
-                });
-              },
-            },
-          ],
+          listeners: []
         },
       ],
     },
