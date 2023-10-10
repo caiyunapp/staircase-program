@@ -147,42 +147,7 @@ const doc = addon.data.prefs.window?.document;
       onPrefsEvents("setAutoTranslateSelection");
     });
 
-  // doc
-  //   .querySelector(`#${makeId("enableComment")}`)
-  //   ?.addEventListener("command", (e: Event) => {
-  //     onPrefsEvents("setAutoTranslateAnnotation");
-  //   });
   
-  // doc
-  //   .querySelector(`#${makeId("enablePopup")}`)
-  //   ?.addEventListener("command", (e: Event) => {
-  //     onPrefsEvents("setEnablePopup");
-  //   });
-  
-  // doc
-  //   .querySelector(`#${makeId("enableAddToNote")}`)
-  //   ?.addEventListener("command", (e: Event) => {
-  //     onPrefsEvents("setEnableAddToNote");
-  //   });
-
-  // doc
-  //   .querySelector(`#${makeId("useWordService")}`)
-  //   ?.addEventListener("command", (e: Event) => {
-  //     onPrefsEvents("setUseWordService");
-  //   });
-
-  // doc
-  //   .querySelector(`#${makeId("sentenceServicesSecret")}`)
-  //   ?.addEventListener("input", (e: Event) => {
-  //     onPrefsEvents("updateSentenceSecret");
-  //   });
-
-  // doc
-  //   .querySelector(`#${makeId("wordServicesSecret")}`)
-  //   ?.addEventListener("input", (e: Event) => {
-  //     onPrefsEvents("updateWordSecret");
-  //   });
-
   doc
     .querySelector(`#${makeId("fontSize")}`)
     ?.addEventListener("input", (e: Event) => {
@@ -195,26 +160,7 @@ const doc = addon.data.prefs.window?.document;
       onPrefsEvents("updatelineHeight");
     });
 
-  // doc
-  //   .querySelector(`#${makeId("caiyunUserAccount")}`)
-  //   ?.addEventListener("input", (e: Event) => {
-  //     onPrefsEvents("updateuseraccount");
-  //   });
-
-  // doc
-  //   .querySelector(`#${makeId("caiyunUserCode")}`)
-  //   ?.addEventListener("input", (e: Event) => {
-  //     onPrefsEvents("updateusercode");
-  //   });
-    // ztoolkit.log('uid:12312312-----------3');
-    // addon.data.prefs.window?.alert(doc
-    //   .querySelector(`#${makeId("caiyunIdtoUserid")}`));
-
-    // doc
-    // .querySelector(`#${makeId("caiyunIdtoUserid")}`)
-    // ?.addEventListener("click", (e: Event) => {
-    //   onPrefsEvents("updateUserStatus");
-    // });
+  
     bindUseridView(doc);
 }
 
@@ -456,7 +402,7 @@ function bindUseridView(doc:Document) {
   
       setPref("caiyunUserAccountIdValue", value.value);
       if ( re && re['rc'] === 0 && re['user_id'] ) {
-        addon.data.prefs.window?.alert('Zotero彩云小译插件翻译功能已激活！');
+        addon.data.prefs.window?.alert('小译账号已绑定，翻译功能已激活！');
         setPref("caiyunUserid", re['user_id']);
         setPref("user_id",re['user_id']);
         await updateUserInfo( re['user_id'] );

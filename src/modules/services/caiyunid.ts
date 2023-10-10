@@ -17,7 +17,6 @@ export default async function (personal_id:string) {
     if (xhr?.status !== 200) {
       throw `Request error: ${xhr?.status}`;
     }
-    // Example： { key: 'chemistry', name: '化学领域术语库', trans_type: 'en2zh' }
     const result = xhr.response;
     // ztoolkit.log(xhr.response);
     return result;

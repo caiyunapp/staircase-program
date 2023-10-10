@@ -1,13 +1,15 @@
-<!ENTITY zotero.__addonRef__.pref.general.label "General">
-<!ENTITY zotero.__addonRef__.pref.basic.enableAuto.label "Auto-Trans Selection">
-<!ENTITY zotero.__addonRef__.pref.basic.enablePopup.label "Enable Popup">
-<!ENTITY zotero.__addonRef__.pref.basic.enableComment.label "Auto-Trans Annotation">
-<!ENTITY zotero.__addonRef__.pref.basic.annotationTranslationInComment.label "Save to Annotation Comment">
-<!ENTITY zotero.__addonRef__.pref.basic.annotationTranslationInBody.label "Save to Annotation Body">
-<!ENTITY zotero.__addonRef__.pref.basic.enableNote.label "Show 'Add Translation to Note' in Popup">
-<!ENTITY zotero.__addonRef__.pref.basic.enableNoteReplaceMode.label "Replace Raw when Adding to Note">
-<!ENTITY zotero.__addonRef__.pref.audio.autoPlay "Auto play prononciation">
-<!ENTITY zotero.__addonRef__.pref.audio.showPlayBtn "Show play buttons in popup panel">
+<!ENTITY zotero.__addonRef__.pref.general.label "通用">
+<!ENTITY zotero.__addonRef__.pref.basic.enableAuto.label "划词自动翻译">
+<!ENTITY zotero.__addonRef__.pref.basic.enablePopup.label "翻译时自动开启悬浮弹窗">
+<!ENTITY zotero.__addonRef__.pref.basic.enableHidePopupTextarea.label "隐藏翻译弹窗">
+<!ENTITY zotero.__addonRef__.pref.basic.enableComment.label "自动翻译批注">
+<!ENTITY zotero.__addonRef__.pref.basic.annotationTranslationInComment.label "存在笔记评论">
+<!ENTITY zotero.__addonRef__.pref.basic.annotationTranslationInBody.label "存在笔记本身">
+<!ENTITY zotero.__addonRef__.pref.basic.enableNote.label "在弹窗显示''">
+<!ENTITY zotero.__addonRef__.pref.basic.enableNoteReplaceMode.label "添加到笔记时替换原始文本">
+<!ENTITY zotero.__addonRef__.pref.audio.autoPlay "自动播放发音">
+<!ENTITY zotero.__addonRef__.pref.audio.showPlayBtn "弹窗中显示播放键">
+
 
 <!ENTITY zotero.__addonRef__.pref.caiyunUser.label "小译用户">
 <!ENTITY zotero.__addonRef__.pref.caiyunUserAccount.label "手机号">
@@ -15,39 +17,41 @@
 <!ENTITY zotero.__addonRef__.pref.caiyunUserDescrption.label "更多内容请访问彩云小译网站">
 <!ENTITY zotero.__addonRef__.pref.caiyunLoginSuccess.label "已登录">
 
-<!ENTITY zotero.__addonRef__.pref.service.label "Service">
-<!ENTITY zotero.__addonRef__.pref.service.sentenceServices.label "Translation Services">
-<!ENTITY zotero.__addonRef__.pref.service.sentenceServicesSecret.label "Secret">
-<!ENTITY zotero.__addonRef__.pref.service.useWordService.label "Use Dictionary Service for Word Translation">
-<!ENTITY zotero.__addonRef__.pref.service.wordServices.label "Dictionary Services">
-<!ENTITY zotero.__addonRef__.pref.service.wordServicesSecret.label "Secret">
-<!ENTITY zotero.__addonRef__.pref.service.langfrom.label "Translate From">
-<!ENTITY zotero.__addonRef__.pref.service.langto.label "To">
-<!ENTITY zotero.__addonRef__.pref.service.hint.label "Translate Engine with 🗝️ requires Secret; See GitHub for more information">
 
-<!ENTITY zotero.__addonRef__.help.feedback.caption.label "User Guide and Feedback">
+<!ENTITY zotero.__addonRef__.pref.service.label "服务">
+<!ENTITY zotero.__addonRef__.pref.service.sentenceServices.label "翻译服务">
+<!ENTITY zotero.__addonRef__.pref.service.sentenceServicesSecret.label "密钥">
+<!ENTITY zotero.__addonRef__.pref.service.useWordService.label "使用字典服务翻译词语">
+<!ENTITY zotero.__addonRef__.pref.service.wordServices.label "字典服务">
+<!ENTITY zotero.__addonRef__.pref.service.wordServicesSecret.label "密钥">
+<!ENTITY zotero.__addonRef__.pref.service.langfrom.label "从">
+<!ENTITY zotero.__addonRef__.pref.service.langto.label "翻译到">
+<!ENTITY zotero.__addonRef__.pref.service.hint.label "带🗝️翻译服务需要密钥; 请参阅GitHub">
+
+<!ENTITY zotero.__addonRef__.help.feedback.caption.label "使用方法及问题反馈">
 <!ENTITY zotero.__addonRef__.help.feedback.label "https://fanyi.caiyunapp.com">
-<!ENTITY zotero.__addonRef__.help.version.label "LingoClound Zotero Plugin V __buildVersion__">
+<!ENTITY zotero.__addonRef__.help.version.label "彩云小译 Zotero 插件 V __buildVersion__">
 <!ENTITY zotero.__addonRef__.help.releasetime.label "Build __buildTime__">
 
-<!ENTITY zotero.__addonRef__.pref.interface.label "Configuration">
-<!ENTITY zotero.__addonRef__.pref.interface.fontSize.label "Font Size">
-<!ENTITY zotero.__addonRef__.pref.interface.lineHeight.label "Line Height">
-<!ENTITY zotero.__addonRef__.pref.interface.autoFocus.label "SideBar: Auto Focus">
-<!ENTITY zotero.__addonRef__.pref.interface.showSidebarEngine.label "SideBar: Show Engine Selection Menu">
-<!ENTITY zotero.__addonRef__.pref.interface.showSidebarSettings.label "SideBar: Show Settings">
-<!ENTITY zotero.__addonRef__.pref.interface.showSidebarConcat.label "SideBar: Show Concat Selection Menu">
-<!ENTITY zotero.__addonRef__.pref.interface.showSidebarLanguage.label "SideBar: Show Language Selection Menu">
-<!ENTITY zotero.__addonRef__.pref.interface.showSidebarRaw.label "SideBar: Show Raw">
-<!ENTITY zotero.__addonRef__.pref.interface.showSidebarCopy.label "SideBar: Show Copy Buttons">
-<!ENTITY zotero.__addonRef__.pref.interface.rawResultOrder.label "SideBar: Reverse Raw/Result">
-<!ENTITY zotero.__addonRef__.pref.interface.showItemBoxTitleTranslation.label "Info Panel: Show Title Translation">
-<!ENTITY zotero.__addonRef__.pref.interface.showItemBoxAbstractTranslation.label "Info Panel: Show Abstract Translation">
-<!ENTITY zotero.__addonRef__.pref.interface.keepWindowTop.label "Standalone: Keep Window on Top">
-<!ENTITY zotero.__addonRef__.pref.interface.keepPopupSize.label "Popup: Remember Size">
+<!ENTITY zotero.__addonRef__.pref.interface.label "通用">
+<!ENTITY zotero.__addonRef__.pref.interface.fontSize.label "原文/译文字体大小">
+<!ENTITY zotero.__addonRef__.pref.interface.lineHeight.label "原文/译文行高">
+<!ENTITY zotero.__addonRef__.pref.interface.autoFocus.label "侧边栏: 自动聚焦">
+<!ENTITY zotero.__addonRef__.pref.interface.showSidebarEngine.label "侧边栏: 显示翻译引擎选择菜单">
+<!ENTITY zotero.__addonRef__.pref.interface.showSidebarLanguage.label "侧边栏: 显示语言选择菜单">
+<!ENTITY zotero.__addonRef__.pref.interface.showSidebarSettings.label "侧边栏: 显示设置">
+<!ENTITY zotero.__addonRef__.pref.interface.showSidebarConcat.label "侧边栏: 显示拼接文本菜单">
+<!ENTITY zotero.__addonRef__.pref.interface.showSidebarRaw.label "侧边栏: 显示源文本">
+<!ENTITY zotero.__addonRef__.pref.interface.showSidebarCopy.label "侧边栏: 显示复制按钮">
+<!ENTITY zotero.__addonRef__.pref.interface.rawResultOrder.label "侧边栏: 反转源/结果显示">
+<!ENTITY zotero.__addonRef__.pref.interface.showItemBoxTitleTranslation.label "信息边栏: 显示标题翻译">
+<!ENTITY zotero.__addonRef__.pref.interface.showItemBoxAbstractTranslation.label "信息边栏：显示摘要翻译">
+<!ENTITY zotero.__addonRef__.pref.interface.keepWindowTop.label "独立窗口: 保持最前">
+<!ENTITY zotero.__addonRef__.pref.interface.keepPopupSize.label "弹窗: 记住大小">
 
-<!ENTITY zotero.__addonRef__.pref.advanced.label "Advanced">
-<!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.label "Disable Automatic Translation when File Language is(split with ',')">
-<!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.alert "Reopen files/restart Zotero to apply.">
+<!ENTITY zotero.__addonRef__.pref.advanced.label "高级">
+<!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.label "对特定语言文件关闭自动翻译(用','分隔)">
+<!ENTITY zotero.__addonRef__.pref.advanced.disabledLanguages.alert "重新打开文件/重启Zotero以应用更改。">
+<!ENTITY zotero.__addonRef__.pref.advanced.splitChar.label "分隔符(原文与翻译之间)">
 
-<!ENTITY zotero.__addonRef__.pref.about.label "About">
+<!ENTITY zotero.__addonRef__.pref.about.label "关于">
