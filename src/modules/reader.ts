@@ -38,7 +38,8 @@ async function initializeReaderSelectionEvent(
   if (instance._pdftranslateInitialized) {
     return;
   }
-  instance._pdftranslateInitialized = true;
+  instance._pdftranslateInitialized = true;//pointerup
+  
   instance._iframeWindow?.addEventListener("pointerup", (ev: MouseEvent) => {
     // Work around to only allow event from iframe#viewer
     const target = ev.target as Element;
@@ -111,7 +112,7 @@ async function initializeReaderAnnotationButton(
           {
             type: "mouseover",
             listener: (e) => {
-              (e.target as HTMLElement).style.backgroundColor = "#F0F0F0";
+              (e.target as HTMLElement).style.backgroundColor = "#72e1c047";
             },
           },
           {
