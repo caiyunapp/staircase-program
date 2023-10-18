@@ -15,14 +15,15 @@ export const SERVICES: Readonly<Readonly<TranslateService>[]> = <const>[
   
   {
     type: "sentence",
-    id: "caiyun_common",
+    id: "caiyun_research",
     defaultSecret: "3975l6lr5pcbvidl6jl2",
   },
   {
     type: "sentence",
-    id: "caiyun_research",
+    id: "caiyun_common",
     defaultSecret: "3975l6lr5pcbvidl6jl2",
-  },
+  }
+ 
 ];
 
 export function getService(id: string) {

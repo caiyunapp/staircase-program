@@ -38,8 +38,9 @@ export function setDefaultPrefSettings() {
   const caiyuntransApiKey = getPref("caiyuntransApikey") as string;
   if (caiyuntransApiKey) {
     setServiceSecret("caiyun", caiyuntransApiKey);
-    setServiceSecret("caiyun_common", caiyuntransApiKey);
     setServiceSecret("caiyun_research", caiyuntransApiKey);
+    setServiceSecret("caiyun_common", caiyuntransApiKey);
+
 
     // clearPref("caiyuntransApikey");
   }

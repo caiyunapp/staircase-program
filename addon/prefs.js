@@ -34,7 +34,7 @@ pref("__prefsPrefix__.caiyuntransMemoryLibList", "[]");
 pref("__prefsPrefix__.autoPlay", true);
 pref("__prefsPrefix__.showPlayBtn", true);
 pref("__prefsPrefix__.disabledLanguages", "");
-pref("__prefsPrefix__.extraEngines", "caiyun_common");
+pref("__prefsPrefix__.extraEngines", "caiyun_research");
 pref("__prefsPrefix__.titleColumnMode", "raw");
 pref("__prefsPrefix__.caiyunUserAccountIdValue", "");
 
