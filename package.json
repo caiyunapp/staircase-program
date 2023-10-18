@@ -8,8 +8,8 @@
     "addonRef": "LingoCloud",
     "prefsPrefix": "extensions.zotero.LingoCloud",
     "addonInstance": "LingoCloud",
-    "releasepage": "https://fanyi.caiyunapp.com",
-    "updaterdf": "https://fanyi.caiyunapp.com"
+    "releasepage": "https://github.com/squirrelRao/zotero-lingocloud/releases/lingocloud-translate.xpi",
+    "updaterdf": "https://github.com/squirrelRao/zotero-lingocloud/releases/lingocloud-translate.xpi"
   },
   "main": "src/index.ts",
   "scripts": {
