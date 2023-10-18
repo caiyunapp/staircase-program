@@ -1,7 +1,7 @@
 {
   "name": "lingocloud-translate",
   "version": "1.0.0",
-  "description": "集成于Zotero的彩云小译PDF翻译插件，支持小译翻译模型和术语库",
+  "description": "彩云小译PDF翻译插件，支持小译多个翻译模型和术语库",
   "config": {
     "addonName": "彩云小译",
     "addonID": "xiaoyi@caiyunapp.com",
